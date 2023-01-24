@@ -6,18 +6,18 @@
 /*   By: ilinhard <ilinhard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 00:37:38 by ilinhard          #+#    #+#             */
-/*   Updated: 2023/01/25 00:42:58 by ilinhard         ###   ########.fr       */
+/*   Updated: 2023/01/25 00:47:39 by ilinhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../cub3d.h"
 
-char	**ft_create_map(char **map, t_game *game)
-{
-	int	i;
+// char	**ft_create_map(char **map, t_game *game)
+// {
+// 	int	i;
 
-	i = 0;
-	while (map[i] == '\n' || map[i] == '\t' || map[i] == ' ')
-		i++;
+// 	i = 0;
+// 	while (map[i] == '\n' || map[i] == '\t' || map[i] == ' ')
+// 		i++;
 	
-}
+// }

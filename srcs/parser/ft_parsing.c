@@ -3,14 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_parsing.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pbeheyt <pbeheyt@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ilinhard <ilinhard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 00:33:26 by ilinhard          #+#    #+#             */
-<<<<<<< HEAD:srcs/ft_parsing.c
-/*   Updated: 2023/01/25 00:37:53 by ilinhard         ###   ########.fr       */
-=======
-/*   Updated: 2023/01/25 00:33:35 by pbeheyt          ###   ########.fr       */
->>>>>>> main:srcs/parser/ft_parsing.c
+/*   Updated: 2023/01/25 00:52:05 by ilinhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
