@@ -6,38 +6,11 @@
 /*   By: ilinhard <ilinhard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 00:33:26 by ilinhard          #+#    #+#             */
-/*   Updated: 2023/01/24 04:17:31 by ilinhard         ###   ########.fr       */
+/*   Updated: 2023/01/24 05:54:09 by ilinhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-char	*ft_strjoin(char *s1, char *s2)
-{
-	char	*new;
-	int		i;
-	int		j;
-
-	if (!s1)
-	{
-		s1 = malloc(sizeof(char) * 1);
-		s1[0] = '\0';
-	}
-	if (!s1 || !s2)
-		return (NULL);
-	new = malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
-	if (!new)
-		return (NULL);
-	i = -1;
-	while (s1[++i])
-		new[i] = s1[i];
-	j = -1;
-	while (s2[++j])
-		new[i + j] = s2[j];
-	new[i + j] = '\0';
-	free(s1);
-	return (new);
-}
 
 char	*ft_init_map(int file_fd)
 {
@@ -54,14 +27,13 @@ char	*ft_init_map(int file_fd)
 	{
 		read_len = read(file_fd, buff, BUFFER_SIZE);
 		if (read_len < 0)
-			return (free(buff), NULL); // add error code etc
+			return (free(buff), NULL);
 		buff[read_len] = '\0';
 		str_map = ft_strjoin(str_map, buff);
 	}
 	free(buff);
 	close(file_fd);
 	return (str_map);
-	
 }
 
 int	ft_check_text_name(t_game *game)
@@ -93,7 +65,7 @@ int	ft_check_texture(char **map_file, t_game *game)
 
 	i = 0;
 	if (!map_file)
-		return (0);
+		return (1);
 	if (ft_search_tab(map_file, "NO", &i) >= 0)
 		game->north = ft_cpy(map_file[i]);
 	if (ft_search_tab(map_file, "SO", &i) >= 0)
@@ -105,12 +77,26 @@ int	ft_check_texture(char **map_file, t_game *game)
 	if (ft_check_text_name(game))
 	{
 		write(1, "Errors texture path\n", 20);
-		ft_free_data_game(game); // provisoire
+		ft_free_data_game(game);
 		return (1);
 	}
-
 	return (0);
-	
+}
+
+int	ft_check_color(char **map_file, t_game *game)
+{
+	int	i;
+
+	i = 0;
+	if (!map_file)
+		return (1);
+	if (ft_search_tab(map_file, "F", &i) >= 0)
+		game->color_f = ft_make_color(map_file[i]);
+	if (ft_search_tab(map_file, "C", &i) >= 0)
+		game->color_c = ft_make_color(map_file[i]);
+	if (game->color_c < 0 || game->color_f < 0)
+		return (1);
+	return (0);
 }
 
 char	**ft_init_parsing(char *file, t_game *game)
@@ -121,17 +107,19 @@ char	**ft_init_parsing(char *file, t_game *game)
 	char	**map_file;
 
 	len = ft_strlen(file);
-	if (len < 4 || file[len - 1] != 'b' || file[len - 2] != 'u' || file[len - 3] != 'c' || file[len - 4] != '.')
+	if (len < 4 || file[len - 1] != 'b' || file[len - 2] != 'u'
+		|| file[len - 3] != 'c' || file[len - 4] != '.')
 		return (write(1, "Error name file\n", 16), NULL);
 	file_fd = open(file, O_RDONLY);
 	if (file_fd < 0)
 		return (write(1, "Error can't open file\n", 22), NULL);
 	str_map = ft_init_map(file_fd);
-	map_file = ft_split(str_map, '\n');	
+	map_file = ft_split(str_map, '\n');
 	free(str_map);
 	if (ft_check_texture(map_file, game))
 		return (ft_free_tab(map_file), NULL);
-	// parsing > Map 
+	if (ft_check_color(map_file, game))
+		return (ft_free_tab(map_file), NULL);
 	ft_free_tab(map_file);
 	ft_free_data_game(game);
 	return (NULL);

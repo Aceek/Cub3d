@@ -2,7 +2,7 @@ NAME				=	cub3d
 
 HEAD				= -I mlx_linux -I srcs/
 
-SRCS				=	cub3d.c ft_parsing.c ft_utils.c ft_split.c
+SRCS				=	cub3d.c ft_parsing.c ft_utils.c ft_split.c ft_utils2.c
 
 OBJ					=	${addprefix srcs/,${SRCS:.c=.o}}
 

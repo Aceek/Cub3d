@@ -6,7 +6,7 @@
 /*   By: ilinhard <ilinhard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 00:43:35 by ilinhard          #+#    #+#             */
-/*   Updated: 2023/01/24 04:29:30 by ilinhard         ###   ########.fr       */
+/*   Updated: 2023/01/24 05:57:49 by ilinhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,29 +22,6 @@ int	ft_strlen(char *str)
 	return (i);
 }
 
-int	ft_find(char *str, char *to_find)
-{
-	int	i;
-	int	j;
-	int	len;
-
-	i = 0;
-	len = ft_strlen(to_find);
-	while (str && str[i] == ' ')
-		i++;
-	j = 0;
-	while (str[i + j] && to_find[j] && str[i + j] == to_find[j])
-			j++;
-	if (j == len)
-	{
-		while (str[i + j] && str[i + j] == ' ')	
-			j++;
-		if (str[i + j] == '.')
-			return (1);
-	}
-	return (0);
-}
-
 int	ft_search_tab(char **tab, char *to_find, int *pos)
 {
 	int	i;
@@ -52,7 +29,7 @@ int	ft_search_tab(char **tab, char *to_find, int *pos)
 	i = 0;
 	while (tab[i])
 	{
-		if (ft_find(tab[i], to_find))		
+		if (ft_find(tab[i], to_find))
 			return (*pos = i, i);
 		i++;
 	}
@@ -101,6 +78,5 @@ void	ft_free_data_game(t_game *game)
 	free(game->east);
 	free(game->west);
 	free(game->south);
-
 	free(game);
 }
