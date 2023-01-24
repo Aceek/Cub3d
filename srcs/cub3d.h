@@ -6,7 +6,7 @@
 /*   By: ilinhard <ilinhard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 23:17:42 by ilinhard          #+#    #+#             */
-/*   Updated: 2023/01/24 01:31:44 by ilinhard         ###   ########.fr       */
+/*   Updated: 2023/01/24 03:53:10 by ilinhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,23 @@
 
 # define BUFFER_SIZE 50
 
-char	**ft_init_parsing(char *file);
+typedef struct s_game
+{
+	char	*north;
+	char	*south;
+	char	*east;
+	char	*west;
+}			t_game;
+
+char	**ft_init_parsing(char *file, t_game *game);
 int		ft_strlen(char *str);
 char	**ft_split(char const *s, char c);
 void	ft_free_tab(char **tab);
+int	ft_search_tab(char **tab, char *to_find, int *pos);
+char	*ft_cpy(char *str);
+void	ft_free_data_game(t_game *game);
+
+
 
 
 #endif

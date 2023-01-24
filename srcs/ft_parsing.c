@@ -6,7 +6,7 @@
 /*   By: ilinhard <ilinhard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 00:33:26 by ilinhard          #+#    #+#             */
-/*   Updated: 2023/01/24 02:14:15 by ilinhard         ###   ########.fr       */
+/*   Updated: 2023/01/24 04:17:31 by ilinhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,14 +64,56 @@ char	*ft_init_map(int file_fd)
 	
 }
 
-// int	ft_check_texture(char **map_file)
-// {
-// 	if (!map_file)
-// 		return (NULL);
-	
-// }
+int	ft_check_text_name(t_game *game)
+{
+	int	len;
 
-char	**ft_init_parsing(char *file)
+	len = ft_strlen(game->north);
+	if (len <= 4 || game->north[len - 1] != 'm' || game->north[len - 2] != 'p'
+		|| game->north[len - 3] != 'x' || game->north[len - 4] != '.')
+		return (1);
+	len = ft_strlen(game->south);
+	if (len <= 4 || game->south[len - 1] != 'm' || game->south[len - 2] != 'p'
+		|| game->south[len - 3] != 'x' || game->south[len - 4] != '.')
+		return (1);
+	len = ft_strlen(game->west);
+	if (len <= 4 || game->west[len - 1] != 'm' || game->west[len - 2] != 'p'
+		|| game->west[len - 3] != 'x' || game->west[len - 4] != '.')
+		return (1);
+	len = ft_strlen(game->east);
+	if (len <= 4 || game->east[len - 1] != 'm' || game->east[len - 2] != 'p'
+		|| game->east[len - 3] != 'x' || game->east[len - 4] != '.')
+		return (1);
+	return (0);
+}
+
+int	ft_check_texture(char **map_file, t_game *game)
+{
+	int	i;
+
+	i = 0;
+	if (!map_file)
+		return (0);
+	if (ft_search_tab(map_file, "NO", &i) >= 0)
+		game->north = ft_cpy(map_file[i]);
+	if (ft_search_tab(map_file, "SO", &i) >= 0)
+		game->south = ft_cpy(map_file[i]);
+	if (ft_search_tab(map_file, "WE", &i) >= 0)
+		game->west = ft_cpy(map_file[i]);
+	if (ft_search_tab(map_file, "EA", &i) >= 0)
+		game->east = ft_cpy(map_file[i]);
+	if (ft_check_text_name(game))
+	{
+		write(1, "Errors texture path\n", 20);
+		ft_free_data_game(game); // provisoire
+		return (1);
+	}
+
+	return (0);
+	
+}
+
+char	**ft_init_parsing(char *file, t_game *game)
 {
 	int		len;
 	int		file_fd;
@@ -87,10 +129,10 @@ char	**ft_init_parsing(char *file)
 	str_map = ft_init_map(file_fd);
 	map_file = ft_split(str_map, '\n');	
 	free(str_map);
-	// if (ft_check_texture(map_file))
-	// 	return (NULL);
-	//parsing > CHECK image N / S / E / W valide 
+	if (ft_check_texture(map_file, game))
+		return (ft_free_tab(map_file), NULL);
 	// parsing > Map 
 	ft_free_tab(map_file);
+	ft_free_data_game(game);
 	return (NULL);
 }
