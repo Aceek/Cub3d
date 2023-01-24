@@ -6,7 +6,7 @@
 /*   By: ilinhard <ilinhard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 23:17:42 by ilinhard          #+#    #+#             */
-/*   Updated: 2023/01/24 05:51:44 by ilinhard         ###   ########.fr       */
+/*   Updated: 2023/01/25 00:35:51 by ilinhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,5 +43,6 @@ int		ft_make_color(char *str);
 int		ft_atoi(char *str, int *pos);
 int		ft_encode_rgb(int red, int green, int blue);
 char	*ft_strjoin(char *s1, char *s2);
+int		ft_find(char *str, char *to_find);
 
 #endif
