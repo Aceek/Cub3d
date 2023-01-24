@@ -3,14 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   ft_parsing.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilinhard <ilinhard@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pbeheyt <pbeheyt@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 00:33:26 by ilinhard          #+#    #+#             */
+<<<<<<< HEAD:srcs/ft_parsing.c
 /*   Updated: 2023/01/25 00:37:53 by ilinhard         ###   ########.fr       */
+=======
+/*   Updated: 2023/01/25 00:33:35 by pbeheyt          ###   ########.fr       */
+>>>>>>> main:srcs/parser/ft_parsing.c
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../cub3d.h"
 
 char	*ft_init_map(int file_fd)
 {
