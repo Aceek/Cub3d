@@ -34,7 +34,7 @@ all					:	${NAME}
 
 clean				:
 					make clean -C mlx_linux
-					@rm -rf ${OBJ}
+					@rm -rf ${DIR_OBJ}
 
 fclean				:	clean
 					@rm -rf ${NAME}
