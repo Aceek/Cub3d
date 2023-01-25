@@ -6,7 +6,7 @@
 /*   By: ilinhard <ilinhard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 00:37:38 by ilinhard          #+#    #+#             */
-/*   Updated: 2023/01/25 03:45:39 by ilinhard         ###   ########.fr       */
+/*   Updated: 2023/01/25 04:14:03 by ilinhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,24 @@ char	**ft_final_map(char **map, int start_map, int len)
 	return(final_map);
 }
 
+void	ft_verify_map_exit(char **map, int i, int j, int *exit)
+{
+	if (!map[i] || !map[i][j] || j >= ft_strlen(map[i]) || j < 0 || i < 0
+		|| (map[i][j] && map[i][j] == ' '))
+	{
+		*exit = 1;
+		return ;
+	}
+	else if (map[i][j] != '0')
+		return ;
+	map[i][j] = 'X';
+	ft_verify_map_exit(map, i - 1, j, exit);
+	ft_verify_map_exit(map, i + 1, j, exit);
+	ft_verify_map_exit(map, i, j - 1, exit);
+	ft_verify_map_exit(map, i, j + 1, exit);
+	
+}
+
 char	**ft_create_map(char **map, t_game *game)
 {
 	int	i;
@@ -77,7 +95,7 @@ char	**ft_create_map(char **map, t_game *game)
 			game->player_y = i - start_map; // vrai pos !!!!
 		i++;
 	}
-	if (count > 1)
+	if (count != 1)
 	{
 		ft_free_tab(map);
 		write(1, "Errors map format / caract\n", 27);
@@ -85,5 +103,10 @@ char	**ft_create_map(char **map, t_game *game)
 	}
 	count = i - start_map;
 	map = ft_final_map(map, start_map, count);
+	count = 0;
+	map[game->player_y][game->player_x] = '0';
+	ft_verify_map_exit(map, game->player_y, game->player_x, &count);
+	if (count)
+		return (ft_free_tab(map), NULL);
 	return (map);
 }

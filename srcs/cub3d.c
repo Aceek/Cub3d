@@ -6,7 +6,7 @@
 /*   By: ilinhard <ilinhard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 23:16:50 by ilinhard          #+#    #+#             */
-/*   Updated: 2023/01/25 03:42:04 by ilinhard         ###   ########.fr       */
+/*   Updated: 2023/01/25 03:48:26 by ilinhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,6 @@ int	main(int ac, char **av)
 	map = ft_init_parsing(av[1], game);
 	if (!map)
 		return (ft_free_data_game(game), 1);
-	int i = 0;
-	while (map[i])
-		printf("%s\n", map[i++]);
 	ft_free_tab(map);
 	ft_free_data_game(game);
 	return (0);
