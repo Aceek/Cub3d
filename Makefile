@@ -9,14 +9,9 @@ DIR_OBJ			=	obj
 SUB_OBJ			=	obj/parser obj/libft obj/image
 
 SRC				=	cub3d.c \
-<<<<<<< HEAD
-					libft/ft_split.c \
-					parser/ft_parsing.c parser/ft_utils.c parser/ft_utils2.c parser/ft_parsing2.c libft/libft.c
-=======
-					libft/ft_split.c libft/ft_memset.c \
-					parser/ft_parsing.c parser/ft_utils.c parser/ft_utils2.c \
+					libft/ft_split.c libft/ft_memset.c libft/libft.c\
+					parser/ft_parsing.c parser/ft_utils.c parser/ft_utils2.c parser/ft_parsing2.c\
 					image/init.c image/clear.c
->>>>>>> main
 
 OBJ				=	$(SRC:%.c=$(DIR_OBJ)/%.o)
 

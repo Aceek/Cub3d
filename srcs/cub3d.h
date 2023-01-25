@@ -3,14 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pbeheyt <pbeheyt@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ilinhard <ilinhard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 23:17:42 by ilinhard          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2023/01/25 03:15:15 by ilinhard         ###   ########.fr       */
-=======
-/*   Updated: 2023/01/25 03:17:02 by pbeheyt          ###   ########.fr       */
->>>>>>> main
+/*   Updated: 2023/01/25 05:51:33 by ilinhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +23,19 @@
 
 # define BUFFER_SIZE 50
 
+typedef struct s_game
+{
+	char	*north;
+	char	*south;
+	char	*east;
+	char	*west;
+	int		color_f;
+	int		color_c;
+	int		player_x;
+	int		player_y;
+	char	**map;
+}			t_game;
+
 typedef struct s_image
 {
 	void	*mlx;
@@ -39,26 +48,15 @@ typedef struct s_image
 	char	*west;
 	int		color_f;
 	int		color_c;
+	t_game	*game;
 }			t_image;
 
-typedef struct s_game
-{
-	char	*north;
-	char	*south;
-	char	*east;
-	char	*west;
-	int		color_f;
-	int		color_c;
-	int		player_x;
-	int		player_y;
-}			t_game;
-
 /*image/clear*/
-void	exit_clean(t_image *image);
+int		exit_clean(t_image *image);
 
 /*image/init*/
 int		keyboard_input(int keycode, t_image *image);
-int		init_mlx(t_image *image);
+int		init_mlx(t_image *image, t_game *game);
 
 /*libft*/
 char	**ft_split(char const *s, char c);

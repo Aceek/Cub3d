@@ -6,7 +6,7 @@
 /*   By: ilinhard <ilinhard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 23:16:50 by ilinhard          #+#    #+#             */
-/*   Updated: 2023/01/25 05:03:37 by ilinhard         ###   ########.fr       */
+/*   Updated: 2023/01/25 06:07:11 by ilinhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,9 @@ int	main(int ac, char **av)
 	map = ft_init_parsing(av[1], game);
 	if (!map)
 		return (ft_free_data_game(game), 1);
-	init_mlx(&image);
+	game->map = map;
+	image.game = game;
+	init_mlx(&image, game);
 	ft_free_tab(map);
 	ft_free_data_game(game);
 	return (0);
