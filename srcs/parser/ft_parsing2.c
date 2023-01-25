@@ -6,7 +6,7 @@
 /*   By: ilinhard <ilinhard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 00:37:38 by ilinhard          #+#    #+#             */
-/*   Updated: 2023/01/25 04:14:03 by ilinhard         ###   ########.fr       */
+/*   Updated: 2023/01/25 04:46:30 by ilinhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,9 @@ char	**ft_create_map(char **map, t_game *game)
 	map[game->player_y][game->player_x] = '0';
 	ft_verify_map_exit(map, game->player_y, game->player_x, &count);
 	if (count)
+	{
+		write(1, "Errors map have exit\n", 21);
 		return (ft_free_tab(map), NULL);
+	}
 	return (map);
 }
