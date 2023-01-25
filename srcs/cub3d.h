@@ -6,7 +6,7 @@
 /*   By: pbeheyt <pbeheyt@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 23:17:42 by ilinhard          #+#    #+#             */
-/*   Updated: 2023/01/25 02:56:10 by pbeheyt          ###   ########.fr       */
+/*   Updated: 2023/01/25 03:17:02 by pbeheyt          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,10 @@ typedef struct s_game
 }			t_game;
 
 /*image/clear*/
-void	exit_clean(int status);
+void	exit_clean(t_image *image);
 
 /*image/init*/
+int		keyboard_input(int keycode, t_image *image);
 int		init_mlx(t_image *image);
 
 /*libft*/
