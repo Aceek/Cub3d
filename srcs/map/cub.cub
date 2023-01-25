@@ -1,0 +1,12 @@
+
+SO ./tex/metal.xpm
+WE ./tex/metal.xpm
+EA ./tex/metal.xpm
+NO ./tex/metal.xpm
+
+F 0,0,0
+C 255,255,255
+
+111
+1S1
+111

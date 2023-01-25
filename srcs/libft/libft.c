@@ -1,23 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing2.c                                         :+:      :+:    :+:   */
+/*   libft.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ilinhard <ilinhard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/25 00:37:38 by ilinhard          #+#    #+#             */
-/*   Updated: 2023/01/25 00:47:39 by ilinhard         ###   ########.fr       */
+/*   Created: 2023/01/25 03:14:58 by ilinhard          #+#    #+#             */
+/*   Updated: 2023/01/25 03:17:24 by ilinhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-// char	**ft_create_map(char **map, t_game *game)
-// {
-// 	int	i;
+char	*ft_strdup(const char *s)
+{
+	size_t		i;
+	char		*cpy;
 
-// 	i = 0;
-// 	while (map[i] == '\n' || map[i] == '\t' || map[i] == ' ')
-// 		i++;
-	
-// }
+	if (s == NULL)
+		return (NULL);
+	i = ft_strlen((char *)s);
+	cpy = malloc(sizeof(char) * (i + 1));
+	if (cpy == NULL)
+		return (NULL);
+	i = 0;
+	while (s[i])
+	{
+		cpy[i] = s[i];
+		i++;
+	}
+	cpy[i] = '\0';
+	return (cpy);
+}

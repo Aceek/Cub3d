@@ -10,7 +10,7 @@ SUB_OBJ			=	obj/parser obj/libft obj/exec
 
 SRC				=	cub3d.c \
 					libft/ft_split.c \
-					parser/ft_parsing.c parser/ft_utils.c parser/ft_utils2.c
+					parser/ft_parsing.c parser/ft_utils.c parser/ft_utils2.c parser/ft_parsing2.c libft/libft.c
 
 OBJ				=	$(SRC:%.c=$(DIR_OBJ)/%.o)
 
@@ -24,7 +24,7 @@ LD_FLAGS			=	-L mlx_linux
 
 $(DIR_OBJ)/%.o:		$(DIR_SRC)/%.c Makefile
 					mkdir -p $(DIR_OBJ) $(SUB_OBJ)
-					$(CC) $(FLAGS) -MMD -c $< -o $@
+					$(CC) $(CFLAGS) -MMD -c $< -o $@
 
 ${NAME}				:	${OBJ}
 					make -C mlx_linux
