@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pbeheyt <pbeheyt@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ilinhard <ilinhard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 01:21:22 by ilinhard          #+#    #+#             */
-/*   Updated: 2023/01/25 00:26:33 by pbeheyt          ###   ########.fr       */
+/*   Updated: 2023/01/25 03:36:31 by ilinhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	ft_count_words(char const *s, char c)
 
 	i = 0;
 	words = 0;
-	while (s[i] != '\0')
+	while (s && s[i] && s[i] != '\0')
 	{
 		if (ft_charset(s[i], c) == 0 && ft_charset(s[i + 1], c) == 1)
 			words++;
@@ -81,6 +81,8 @@ char	**ft_split(char const *s, char c)
 	int		words;
 	char	**tab;
 
+	if (!s || !s[0])
+		return (NULL);
 	words = 0;
 	words = ft_count_words(s, c);
 	tab = malloc(sizeof(char *) * (words + 1));

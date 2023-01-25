@@ -6,7 +6,7 @@
 /*   By: ilinhard <ilinhard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 00:37:38 by ilinhard          #+#    #+#             */
-/*   Updated: 2023/01/25 03:26:21 by ilinhard         ###   ########.fr       */
+/*   Updated: 2023/01/25 03:45:39 by ilinhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,11 @@ char	**ft_create_map(char **map, t_game *game)
 		i++;
 	}
 	if (count > 1)
+	{
+		ft_free_tab(map);
 		write(1, "Errors map format / caract\n", 27);
+		return (NULL);
+	}
 	count = i - start_map;
 	map = ft_final_map(map, start_map, count);
 	return (map);
