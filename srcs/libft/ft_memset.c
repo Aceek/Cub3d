@@ -1,34 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libft.c                                            :+:      :+:    :+:   */
+/*   ft_memset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ilinhard <ilinhard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/25 03:14:58 by ilinhard          #+#    #+#             */
-/*   Updated: 2023/01/25 05:03:53 by ilinhard         ###   ########.fr       */
+/*   Created: 2022/03/09 11:47:15 by pbeheyt           #+#    #+#             */
+/*   Updated: 2023/01/25 05:04:04 by ilinhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-char	*ft_strdup(const char *s)
+void	*ft_memset(void *s, int c, size_t n)
 {
-	int			i;
-	char		*cpy;
+	size_t			i;
+	unsigned char	*ptr;
 
-	if (s == NULL)
-		return (NULL);
-	i = ft_strlen((char *)s);
-	cpy = malloc(sizeof(char) * (i + 1));
-	if (cpy == NULL)
-		return (NULL);
+	ptr = (unsigned char *)s;
 	i = 0;
-	while (s[i])
-	{
-		cpy[i] = s[i];
-		i++;
-	}
-	cpy[i] = '\0';
-	return (cpy);
+	while (i < n)
+		ptr[i++] = c;
+	return (s);
 }

@@ -6,9 +6,10 @@
 /*   By: ilinhard <ilinhard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 23:16:50 by ilinhard          #+#    #+#             */
-/*   Updated: 2023/01/25 03:48:26 by ilinhard         ###   ########.fr       */
+/*   Updated: 2023/01/25 05:03:37 by ilinhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "cub3d.h"
 
@@ -27,6 +28,7 @@ void	ft_init_struct(t_game *game)
 int	main(int ac, char **av)
 {
 	t_game	*game;
+	t_image	image;
 	char	**map;
 
 	if (ac < 2 || !av || !av[1])
@@ -38,6 +40,7 @@ int	main(int ac, char **av)
 	map = ft_init_parsing(av[1], game);
 	if (!map)
 		return (ft_free_data_game(game), 1);
+	init_mlx(&image);
 	ft_free_tab(map);
 	ft_free_data_game(game);
 	return (0);
