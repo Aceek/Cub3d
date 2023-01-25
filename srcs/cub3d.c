@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilinhard <ilinhard@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pbeheyt <pbeheyt@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 23:16:50 by ilinhard          #+#    #+#             */
-/*   Updated: 2023/01/25 00:46:46 by ilinhard         ###   ########.fr       */
+/*   Updated: 2023/01/25 02:46:19 by pbeheyt          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	ft_init_struct(t_game *game)
 int	main(int ac, char **av)
 {
 	t_game	*game;
+	t_image	image;
 	char	**map;
 
 	if (ac < 2 || !av || !av[1])
@@ -35,6 +36,7 @@ int	main(int ac, char **av)
 	ft_init_struct(game);
 	map = ft_init_parsing(av[1], game);
 	// map = ft_create_map(map, game);
+	init_mlx(&image);
 	ft_free_tab(map);
 	ft_free_data_game(game);
 	return (0);

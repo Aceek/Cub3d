@@ -6,11 +6,12 @@ DIR_SRC			=	srcs
 
 DIR_OBJ			=	obj
 
-SUB_OBJ			=	obj/parser obj/libft obj/exec
+SUB_OBJ			=	obj/parser obj/libft obj/image
 
 SRC				=	cub3d.c \
-					libft/ft_split.c \
-					parser/ft_parsing.c parser/ft_utils.c parser/ft_utils2.c
+					libft/ft_split.c libft/ft_memset.c \
+					parser/ft_parsing.c parser/ft_utils.c parser/ft_utils2.c \
+					image/init.c image/clear.c
 
 OBJ				=	$(SRC:%.c=$(DIR_OBJ)/%.o)
 
