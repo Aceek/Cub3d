@@ -6,7 +6,7 @@
 /*   By: pbeheyt <pbeheyt@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 11:47:15 by pbeheyt           #+#    #+#             */
-/*   Updated: 2023/01/27 05:47:06 by pbeheyt          ###   ########.fr       */
+/*   Updated: 2023/01/27 06:07:42 by pbeheyt          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ t_texture	*file_to_image(t_image *image, char *path)
 	t_texture	*txt;
 	
 	if (!path)
-		return (write(1, "No texture path error\n", 22), NULL);
+		return (exit_clean(image), NULL);
 	txt = malloc(sizeof(t_texture));
 	if (!txt)
 		return (exit_clean(image), NULL);
