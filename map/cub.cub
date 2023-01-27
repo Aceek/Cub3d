@@ -1,8 +1,8 @@
 
-SO ./tex/metal.xpm
-WE ./tex/metal.xpm
-EA ./tex/metal.xpm
-NO ./tex/metal.xpm
+SO ./txt/0S.xpm
+WE ./txt/0S.xpm
+EA ./txt/0S.xpm
+NO ./txt/0S.xpm
 
 F 0,0,0
 C 255,255,255

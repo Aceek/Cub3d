@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilinhard <ilinhard@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pbeheyt <pbeheyt@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 23:17:42 by ilinhard          #+#    #+#             */
-/*   Updated: 2023/01/25 05:51:33 by ilinhard         ###   ########.fr       */
+/*   Updated: 2023/01/27 05:47:58 by pbeheyt          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,19 @@
 
 # define BUFFER_SIZE 50
 
+typedef struct s_size
+{
+	int		height;
+	int		width;
+}			t_size;
+
+typedef struct s_texture
+{
+	t_size	size;
+	char	*path;
+	void	*content;
+}			t_texture;
+
 typedef struct s_game
 {
 	char	*north;
@@ -38,25 +51,27 @@ typedef struct s_game
 
 typedef struct s_image
 {
-	void	*mlx;
-	void	*win;
-	int		height;
-	int		width;
-	char	*north;
-	char	*south;
-	char	*east;
-	char	*west;
-	int		color_f;
-	int		color_c;
-	t_game	*game;
-}			t_image;
+	void		*mlx;
+	void		*win;
+	t_texture	*north;
+	t_texture	*south;
+	t_texture	*east;
+	t_texture	*west;
+	int			color_f;
+	int			color_c;
+	t_size		size;
+	t_game		*game;
+}				t_image;
 
 /*image/clear*/
+void	free_txt(t_image *image, t_texture *txt);
 int		exit_clean(t_image *image);
 
 /*image/init*/
-int		keyboard_input(int keycode, t_image *image);
-int		init_mlx(t_image *image, t_game *game);
+int			keyboard_input(int keycode, t_image *image);
+t_texture	*file_to_image(t_image *image, char *path);
+void		init_txt(t_image *image, t_game *game);
+int			init_mlx(t_image *image, t_game *game);
 
 /*libft*/
 char	**ft_split(char const *s, char c);
