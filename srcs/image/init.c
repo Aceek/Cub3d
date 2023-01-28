@@ -6,7 +6,7 @@
 /*   By: pbeheyt <pbeheyt@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 11:47:15 by pbeheyt           #+#    #+#             */
-/*   Updated: 2023/01/28 05:39:04 by pbeheyt          ###   ########.fr       */
+/*   Updated: 2023/01/28 07:31:40 by pbeheyt          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,13 @@ int	keyboard_input(int keycode, t_image *image)
 t_texture	*file_to_image(t_image *image, char *path)
 {
 	t_texture	*txt;
+	int			bpp;
+	int			endian;
+	int			size_line;
 	
+	bpp = 32;
+	endian = 1;
+	size_line = 0;
 	if (!path)
 		return (exit_clean(image), NULL);
 	txt = malloc(sizeof(t_texture));
@@ -38,6 +44,7 @@ t_texture	*file_to_image(t_image *image, char *path)
 				&txt->size.width, &txt->size.height);
 	if (!txt->content)
 			return (free(txt), exit_clean(image), NULL);
+	txt->buff = (int *)mlx_get_data_addr(txt->content, &bpp, &size_line, &endian);
 	return (txt);
 }
 

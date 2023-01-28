@@ -6,7 +6,7 @@
 /*   By: pbeheyt <pbeheyt@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 23:17:42 by ilinhard          #+#    #+#             */
-/*   Updated: 2023/01/28 05:37:44 by pbeheyt          ###   ########.fr       */
+/*   Updated: 2023/01/28 07:09:25 by pbeheyt          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ typedef struct s_texture
 	t_size	size;
 	char	*path;
 	void	*content;
+	void	*txt; // test
+	int		*buff;
 }			t_texture;
 
 typedef struct s_game
@@ -80,6 +82,7 @@ typedef struct s_image
 	t_texture	*south;
 	t_texture	*east;
 	t_texture	*west;
+	t_texture	*global_image; // test
 	int			color_f;
 	int			color_c;
 	t_size		size;

@@ -6,7 +6,7 @@
 /*   By: pbeheyt <pbeheyt@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 11:47:15 by pbeheyt           #+#    #+#             */
-/*   Updated: 2023/01/28 05:39:19 by pbeheyt          ###   ########.fr       */
+/*   Updated: 2023/01/28 07:53:08 by pbeheyt          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,39 @@ void    ft_dda(t_image *image)
     }
 }
 
+
+t_texture *ft_init_display(t_image *image)
+{
+    int         bpp;
+    int         endian;
+    int         size_line;
+    t_texture   *global_img;
+
+    bpp = 32;
+    endian = 1;
+    size_line = 0;
+    global_img = malloc(sizeof(t_texture));
+    if (!global_img)
+        return (exit_clean(image), NULL);
+    global_img->content = mlx_new_image(image->mlx, image->size.width, image->size.height);
+    global_img->buff = (int *)mlx_get_data_addr(global_img->content, &bpp, &size_line, &endian);
+    mlx_get_data_addr(global_img->content, &bpp, &size_line, &endian);
+    return (global_img);
+    
+}
+
+void    ft_floor_and_celling(t_image *image)
+{
+    int i;
+
+    i = -1;
+    while (++i < ((image->size.width * image->size.height) / 2))
+        image->global_image->buff[i] = image->game->color_c;
+    while (++i < (image->size.width * image->size.height))
+        image->global_image->buff[i] = image->game->color_f;
+}
+
+
 int display(void *param)
 {
     t_image *image;
@@ -117,6 +150,8 @@ int display(void *param)
 
     image = (t_image *)param;
     ft_init_diplay_struct(image);
+    image->global_image = ft_init_display(image);
+    ft_floor_and_celling(image);
     x = 0;
     while (x < image->size.width)
     {
@@ -126,7 +161,11 @@ int display(void *param)
         //perform DDA
         ft_dda(image);
         // affichage ...
+        
         x++;
     }
+    mlx_put_image_to_window(image->mlx, image->win, image->global_image->content, 0, 0);
+    mlx_destroy_image(image->mlx, image->global_image->content);
+    free(image->global_image);
     return (0);
 }
