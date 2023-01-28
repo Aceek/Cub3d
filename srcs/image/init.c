@@ -6,7 +6,7 @@
 /*   By: pbeheyt <pbeheyt@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 11:47:15 by pbeheyt           #+#    #+#             */
-/*   Updated: 2023/01/27 06:07:42 by pbeheyt          ###   ########.fr       */
+/*   Updated: 2023/01/28 05:39:04 by pbeheyt          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,15 @@ t_texture	*file_to_image(t_image *image, char *path)
 	return (txt);
 }
 
-void	init_txt(t_image *image, t_game *game)
+void	init_image(t_image *image, t_game *game)
 {
+	ft_memset(image, 0, sizeof(t_image));
+	image->mlx = mlx_init();
+	if (!image->mlx)
+		exit_clean(image);
+	image->game = game;
+	image->size.height = 720;
+	image->size.width = 1480;
 	image->north = file_to_image(image, game->north);
 	image->south = file_to_image(image, game->south);
 	image->west = file_to_image(image, game->west);
@@ -51,17 +58,11 @@ void	init_txt(t_image *image, t_game *game)
 
 int	init_mlx(t_image *image, t_game *game)
 {
-	ft_memset(image, 0, sizeof(t_image));
-	image->game = game;
-	image->size.height = 720;
-	image->size.width = 1480;
-	image->mlx = mlx_init();
-	if (!image->mlx)
-		return (0);
+	init_image(image, game);
 	image->win = mlx_new_window(image->mlx, image->size.width,
 			image->size.height, "CUBE3D");
-	init_txt(image, game);
 	mlx_key_hook(image->win, keyboard_input, image);
+	mlx_loop_hook(image->mlx, &display, image);
 	mlx_hook(image->win, 17, 0, exit_clean, image);
 	mlx_loop(image->mlx);
 	return (0);

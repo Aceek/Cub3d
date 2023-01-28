@@ -6,7 +6,7 @@
 /*   By: pbeheyt <pbeheyt@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 23:17:42 by ilinhard          #+#    #+#             */
-/*   Updated: 2023/01/27 05:47:58 by pbeheyt          ###   ########.fr       */
+/*   Updated: 2023/01/28 05:37:44 by pbeheyt          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <sys/stat.h>
 # include <fcntl.h>
 # include "../mlx_linux/mlx.h"
+# include "math.h"
 
 # define BUFFER_SIZE 50
 
@@ -49,8 +50,30 @@ typedef struct s_game
 	char	**map;
 }			t_game;
 
+typedef struct s_pos
+{
+	double	x;
+	double	y;
+}			t_pos;
+
 typedef struct s_image
 {
+	t_pos		player_pos;
+	t_pos		player_dir;
+	t_pos		plane;	
+	t_pos		raydir;
+	t_pos		map;
+	t_pos		side_dist;
+	t_pos		delta_dist;
+	t_pos		step;
+	int			key;
+	int			draw_start;
+	int			line_height;
+	int			draw_end;
+	int			hit;
+	int			side;
+	double		wall_dist;
+	double		camera_x;
 	void		*mlx;
 	void		*win;
 	t_texture	*north;
@@ -62,6 +85,8 @@ typedef struct s_image
 	t_size		size;
 	t_game		*game;
 }				t_image;
+
+int display(void *param);
 
 /*image/clear*/
 void	free_txt(t_image *image, t_texture *txt);
