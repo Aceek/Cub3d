@@ -6,22 +6,22 @@
 /*   By: pbeheyt <pbeheyt@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 11:47:15 by pbeheyt           #+#    #+#             */
-/*   Updated: 2023/01/30 04:55:22 by pbeheyt          ###   ########.fr       */
+/*   Updated: 2023/01/30 06:00:43 by pbeheyt          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-void    ft_init_diplay_struct(t_image *image)
-{
-    image->player_pos.x = image->game->player_x + 0.5;
-    image->player_pos.y = image->game->player_y + 0.5;
-    image->player_dir.x = 0;
-    image->player_dir.y = -1;
-    image->plane.x = 0.66;
-    image->plane.y = 0;
-    // init time
-}
+// void    ft_init_diplay_struct(t_image *image)
+// {
+//     image->player_pos.x = image->game->player_x + 0.5;
+//     image->player_pos.y = image->game->player_y + 0.5;
+//     image->player_dir.x = 0;
+//     image->player_dir.y = -1;
+//     image->plane.x = 0.66;
+//     image->plane.y = 0;
+//     // init time
+// }
 
 void    ft_init_ray(t_image *image, int x)
 {
@@ -235,7 +235,6 @@ int display(void *param)
     int         x;
 
     image = (t_image *)param;
-    ft_init_diplay_struct(image);
     image->global_image = ft_init_display(image);
     ft_floor_and_celling(image);
     x = 0;
@@ -280,5 +279,7 @@ int display(void *param)
     mlx_put_image_to_window(image->mlx, image->win, image->global_image->content, 0, 0);
     mlx_destroy_image(image->mlx, image->global_image->content);
     free(image->global_image);
+    if (image->key != 0)
+        keyboard_input(image->key, image);
     return (0);
 }

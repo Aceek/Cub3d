@@ -6,20 +6,65 @@
 /*   By: pbeheyt <pbeheyt@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 11:47:15 by pbeheyt           #+#    #+#             */
-/*   Updated: 2023/01/28 07:31:40 by pbeheyt          ###   ########.fr       */
+/*   Updated: 2023/01/30 07:02:46 by pbeheyt          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
+int	press(int keycode, t_image *image)
+{
+	image->key = 0;
+	image->key = keycode;
+	return (0);
+}
+
+int release(int keycode, t_image *image)
+{
+	(void)keycode;
+	image->key = 0;
+	return (0);
+}
+
+void	move(t_image *image, double next_x, double next_y)
+{
+	if (image->game->map[(int)next_y][(int)next_x] == 'X')
+	{
+		image->player_pos.x = next_x;	
+		image->player_pos.y = next_y;
+	}
+}
+
 int	keyboard_input(int keycode, t_image *image)
 {
+	double	tmp;
+	
 	if (keycode == 65307)
 		exit_clean(image);
-	// if (keycode == 'W' || keycode == 'w')
-	// if (keycode == 'S' || keycode == 's')
-	// if (keycode == 'A' || keycode == 'a')
-	// if (keycode == 'D' || keycode == 'd')
+	if (keycode == 'W' || keycode == 'w')
+		move(image, image->player_pos.x + image->player_dir.x * 0.05, image->player_pos.y + image->player_dir.y * 0.05);
+	if (keycode == 'S' || keycode == 's')
+		move(image, image->player_pos.x - image->player_dir.x * 0.05, image->player_pos.y - image->player_dir.y * 0.05);
+	if (keycode == 'A' || keycode == 'a')
+		move(image, image->player_pos.x - image->plane.x * 0.05, image->player_pos.y - image->plane.y * 0.05);
+	if (keycode == 'D' || keycode == 'd')
+		move(image, image->player_pos.x + image->plane.x * 0.05, image->player_pos.y + image->plane.y * 0.05);
+	if (keycode == 65361 || keycode == 'o')
+	{
+		image->player_dir.x = image->player_dir.x * cos(-0.02) - image->player_dir.y * sin(-0.02);
+		image->player_dir.y = image->player_dir.x * sin(-0.02) + image->player_dir.y * cos(-0.02);
+		tmp = image->plane.x;
+		image->plane.x = image->plane.x * cos(-0.02) - image->plane.y * sin(-0.02);
+		image->plane.y = tmp * sin(-0.02) + image->plane.y * cos(-0.02);
+	}
+	else if (keycode == 65363 || keycode == 'p')
+	{
+		image->player_dir.x = image->player_dir.x * cos(0.02) - image->player_dir.y * sin(0.02);
+		image->player_dir.y = image->player_dir.x * sin(0.02) + image->player_dir.y * cos(0.02);
+		tmp = image->plane.x;
+		image->plane.x = image->plane.x * cos(0.02) - image->plane.y * sin(0.02);
+		image->plane.y = tmp * sin(0.02) + image->plane.y * cos(0.02);
+	}
 	return (0);
 }
 
@@ -63,14 +108,27 @@ void	init_image(t_image *image, t_game *game)
 	image->east = file_to_image(image, game->east);
 }
 
+void    ft_init_diplay_struct(t_image *image)
+{
+    image->player_pos.x = image->game->player_x + 0.5;
+    image->player_pos.y = image->game->player_y + 0.5;
+    image->player_dir.x = 0;
+    image->player_dir.y = -1;
+    image->plane.x = 0.66;
+    image->plane.y = 0;
+    // init time
+}
+
 int	init_mlx(t_image *image, t_game *game)
 {
 	init_image(image, game);
+	ft_init_diplay_struct(image);
 	image->win = mlx_new_window(image->mlx, image->size.width,
 			image->size.height, "CUBE3D");
-	mlx_key_hook(image->win, keyboard_input, image);
-	mlx_loop_hook(image->mlx, &display, image);
+	mlx_hook(image->win, 2, 1L << 0, &press, image);
+	mlx_hook(image->win, 3, 1L << 1, &release, image);
 	mlx_hook(image->win, 17, 0, exit_clean, image);
+	mlx_loop_hook(image->mlx, &display, image);
 	mlx_loop(image->mlx);
 	return (0);
 }

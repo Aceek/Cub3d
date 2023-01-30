@@ -6,7 +6,7 @@
 /*   By: pbeheyt <pbeheyt@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 23:16:50 by ilinhard          #+#    #+#             */
-/*   Updated: 2023/01/28 05:01:10 by pbeheyt          ###   ########.fr       */
+/*   Updated: 2023/01/30 06:01:00 by pbeheyt          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ int	main(int ac, char **av)
 		return (ft_free_data_game(game), 1);
 	game->map = map;
 	image.game = game;
+	
 	init_mlx(&image, game);
 	ft_free_tab(map);
 	ft_free_data_game(game);
