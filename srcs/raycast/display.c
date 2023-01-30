@@ -6,7 +6,7 @@
 /*   By: pbeheyt <pbeheyt@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 11:47:15 by pbeheyt           #+#    #+#             */
-/*   Updated: 2023/01/29 05:30:39 by pbeheyt          ###   ########.fr       */
+/*   Updated: 2023/01/30 04:55:22 by pbeheyt          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 
 void    ft_init_diplay_struct(t_image *image)
 {
-    image->player_pos.x = image->game->player_x;
-    image->player_pos.y = image->game->player_y;
-    image->player_dir.x = -1;
-    image->player_dir.y = 0;
-    image->plane.x = 0;
-    image->plane.y = 0.66;
+    image->player_pos.x = image->game->player_x + 0.5;
+    image->player_pos.y = image->game->player_y + 0.5;
+    image->player_dir.x = 0;
+    image->player_dir.y = -1;
+    image->plane.x = 0.66;
+    image->plane.y = 0;
     // init time
 }
 
@@ -30,14 +30,27 @@ void    ft_init_ray(t_image *image, int x)
     image->camera_x = (2 * x / (double)image->size.width) - 1;
     image->raydir.x = image->player_dir.x + (image->plane.x * image->camera_x);
     image->raydir.y = image->player_dir.y + (image->plane.y * image->camera_x);
-
+    // if (image->raydir.x == 0)
+    //     image->raydir.x = 0.0001;
+    // if (image->raydir.y == 0)
+    //     image->raydir.y = 0.0001;
+        
     //which box of the map we're in
-    image->map.x = image->plane.x;
-    image->map.y = image->plane.y;
-    
+    // image->map.x = image->plane.x;
+    // image->map.y = image->plane.y;
+
+   
     //length of ray from one x or y-side to next x or y-side
-    image->delta_dist.x = fabs(1 / image->raydir.x);
-    image->delta_dist.y = fabs(1 / image->raydir.y);
+        
+    // if(image->raydir.x == 0)
+    //     image->delta_dist.x = 1e30;
+    // else
+        image->delta_dist.x = fabs(1 / image->raydir.x);
+
+    // if(image->raydir.y == 0)
+    //     image->delta_dist.y = 1e30;
+    // else
+        image->delta_dist.y = fabs(1 / image->raydir.y);
 }
 
 void    ft_calculate_side_dist(t_image *image)
@@ -62,15 +75,31 @@ void    ft_calculate_side_dist(t_image *image)
         image->step.y = 1;
         image->side_dist.y = (image->map.y + 1.0 - image->player_pos.y) * image->delta_dist.y;   
     }
+    // if (image->camera_x == 0)
+    // {
+    //         printf("side_dist.x : %f\n", image->side_dist.x);
+    //         printf("delta_dist_x : %f\n", image->delta_dist.x);
+            
+    //         printf("side_dist.y : %f\n", image->side_dist.y);
+    //         printf("+map.y : %f\n", image->map.y);
+    //         printf("-player pos.y : %f\n", image->player_pos.y);
+    //         printf("*delta_dist_y : %f\n", image->delta_dist.y);
+    //         exit(1);
+    // }
 }
 
 void    ft_wall_dist_calculate(t_image *image)
 {
     //Calculate distance of perpendicular ray (Euclidean distance would give fisheye effect!)
+    // if (!image->side)
+    //     image->wall_dist = (image->side_dist.x - image->delta_dist.x);
+    // else
+    //     image->wall_dist = (image->side_dist.y - image->delta_dist.y);
     if (!image->side)
         image->wall_dist = (image->side_dist.x - image->delta_dist.x);
     else
         image->wall_dist = (image->side_dist.y - image->delta_dist.y);
+        // image->wall_dist = (image->map.y - image->player_pos.y);
     //Calculate height of line to draw on screen
     image->line_height = (image->size.height / image->wall_dist);
     //calculate lowest and highest pixel to fill in current stripe
@@ -85,8 +114,17 @@ void    ft_wall_dist_calculate(t_image *image)
 void    ft_dda(t_image *image)
 {
     while (!image->hit)
+    // while (1)
     {
         //jump to next map square, either in x-direction, or in y-direction
+    // if (image->camera_x == 0)
+    // {
+    //         printf("side_dist.x : %f\n", image->side_dist.x);
+    //         printf("side_dist.y : %f\n", image->side_dist.y);
+    //         printf("delta_dist_x : %f\n", image->delta_dist.x);
+    //         printf("delta_dist_y : %f\n", image->delta_dist.y);
+    //         exit(1);
+    // }
         if (image->side_dist.x < image->side_dist.y)
         {
             image->side_dist.x += image->delta_dist.x;
@@ -104,10 +142,10 @@ void    ft_dda(t_image *image)
         if (image->map.y < 0)
             image->map.y = 0;
         //Check if ray has hit a wall
-        if (image->game->map[(int)image->map.x][(int)image->map.y] == '1')
+        if (image->game->map[(int)image->map.y][(int)image->map.x] == '1')
             image->hit = 1;
-        ft_wall_dist_calculate(image);
     }
+    
 }
 
 
@@ -203,32 +241,41 @@ int display(void *param)
     x = 0;
     while (x < image->size.width)
     {
+        image->map.x = image->player_pos.x;
+        image->map.y = image->player_pos.y;
         ft_init_ray(image, x);
         // calculate step and initial sideDist
         ft_calculate_side_dist(image);
         //perform DDA
         ft_dda(image);
         // affichage ...
+        ft_wall_dist_calculate(image);
         ft_fill_img_buffer(x, image);
+
+        // if (x == 0 || x == 746)
+        // {
+        //     printf("x == %d\n", x);
+        //     printf("map_x : %d map_y : %d\n", image->map.x, image->map.y);
+        //     printf("camera_x : %f\n", image->camera_x);
+        //     printf("side : %d\n", image->side);
+        //     printf("wall dist : %f\n", image->wall_dist);
+        //     printf("side_dist.x : %f\n", image->side_dist.x);
+        //     printf("side_dist.y : %f\n", image->side_dist.y);
+        //     printf("delta_dist_x : %f\n", image->delta_dist.x);
+        //     printf("image->line_h : %d\n", image->line_height);
+        //     printf(" size.height : %d\n", image->size.height);
+        //     printf("start : %d\n", image->draw_start);
+        //     printf("end : %d\n", image->draw_end);
+        //     printf("raydir_x : %f\n", image->raydir.x);
+        //     printf("raydir_y : %f\n", image->raydir.y);
+        //     printf("player_pos_x : %f\n", image->player_pos.x);
+        //     printf("player_pos_y : %f\n", image->player_pos.y);
+        //     printf("delta_dist_x : %f\n", image->delta_dist.x);
+        //     printf("delta_dist_y : %f\n\n\n\n", image->delta_dist.y);
+        //     if (x == 746)
+        //         exit (1);
+        // }
         x++;
-        if (x == (image->size.width / 2) + 1 || x == 1 || x == (image->size.width / 2))
-        {
-            printf("x == %d\n", x);
-            printf("camera_x : %f\n", image->camera_x);
-            printf("side : %d\n", image->side);
-            printf("wall dist : %f\n", image->wall_dist);
-            printf("side_dist.x : %f\n", image->side_dist.x);
-            printf("side_dist.y : %f\n", image->side_dist.y);
-            printf("delta_dist_x : %f\n", image->delta_dist.x);
-            printf("delta_dist_y : %f\n", image->delta_dist.y);
-            printf("image->line_h : %d\n", image->line_height);
-            printf(" size.height : %d\n", image->size.height);
-            printf("start : %d\n", image->draw_start);
-            printf("end : %d\n", image->draw_end);
-            printf("raydir_x : %f\n", image->raydir.x);
-            printf("raydir_y : %f\n", image->raydir.y);
-            printf("delta_dist_y : %f\n\n\n\n", image->delta_dist.y);
-        }
     }
     mlx_put_image_to_window(image->mlx, image->win, image->global_image->content, 0, 0);
     mlx_destroy_image(image->mlx, image->global_image->content);

@@ -6,7 +6,7 @@
 /*   By: pbeheyt <pbeheyt@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 23:17:42 by ilinhard          #+#    #+#             */
-/*   Updated: 2023/01/28 07:09:25 by pbeheyt          ###   ########.fr       */
+/*   Updated: 2023/01/30 04:38:58 by pbeheyt          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,16 +58,22 @@ typedef struct s_pos
 	double	y;
 }			t_pos;
 
+typedef struct s_posi
+{
+	int	x;
+	int	y;
+}			t_posi;
+
 typedef struct s_image
 {
 	t_pos		player_pos;
 	t_pos		player_dir;
 	t_pos		plane;	
 	t_pos		raydir;
-	t_pos		map;
+	t_posi		map;
 	t_pos		side_dist;
 	t_pos		delta_dist;
-	t_pos		step;
+	t_posi		step;
 	int			key;
 	int			draw_start;
 	int			line_height;
