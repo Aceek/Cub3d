@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   clear.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pbeheyt <pbeheyt@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ilinhard <ilinhard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 11:47:15 by pbeheyt           #+#    #+#             */
-/*   Updated: 2023/01/27 05:46:24 by pbeheyt          ###   ########.fr       */
+/*   Updated: 2023/01/31 03:44:13 by ilinhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,14 @@ int	exit_clean(t_image *image)
 	free_txt(image, image->south);
 	free_txt(image, image->west);
 	free_txt(image, image->east);
-	mlx_destroy_window(image->mlx, image->win);
-	mlx_destroy_display(image->mlx);
-	free(image->mlx);
+	if (image->win)
+		mlx_destroy_window(image->mlx, image->win);
+	if (image->mlx)
+	{
+		mlx_destroy_display(image->mlx);
+		free(image->mlx);
+	}
 	ft_free_tab(image->game->map);
 	ft_free_data_game(image->game);
-	exit(0);
-	return (0);
+	exit(1);
 }

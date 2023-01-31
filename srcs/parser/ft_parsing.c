@@ -6,7 +6,7 @@
 /*   By: ilinhard <ilinhard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 00:33:26 by ilinhard          #+#    #+#             */
-/*   Updated: 2023/01/25 03:40:03 by ilinhard         ###   ########.fr       */
+/*   Updated: 2023/01/31 03:23:35 by ilinhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ int	ft_check_color(char **map_file, t_game *game)
 	if (ft_search_tab(map_file, "C", &i) >= 0)
 		game->color_c = ft_make_color(map_file[i]);
 	if (game->color_c < 0 || game->color_f < 0)
-		return (1);
+		return (write(2, "Errors color format\n", 20), 1);
 	return (0);
 }
 

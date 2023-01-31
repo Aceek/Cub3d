@@ -6,7 +6,7 @@
 /*   By: ilinhard <ilinhard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 23:17:42 by ilinhard          #+#    #+#             */
-/*   Updated: 2023/01/31 02:42:17 by ilinhard         ###   ########.fr       */
+/*   Updated: 2023/01/31 03:34:01 by ilinhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,13 @@ void    	ft_calculate_side_dist(t_image *image);
 void    	ft_floor_and_celling(t_image *image);
 int			get_pxl_color(t_image *image, t_texture *txt, int start);
 t_texture	*ft_init_display(t_image *image);
+
+/*movement.c*/
+int			press(int keycode, t_image *image);
+int			release(int keycode, t_image *image);
+void		move(t_image *image, double next_x, double next_y);
+int			keyboard_input(int keycode, t_image *image);
+
 
 
 /*image/clear*/

@@ -6,7 +6,7 @@
 /*   By: ilinhard <ilinhard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 00:37:38 by ilinhard          #+#    #+#             */
-/*   Updated: 2023/01/31 02:48:10 by ilinhard         ###   ########.fr       */
+/*   Updated: 2023/01/31 03:48:32 by ilinhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,14 +86,15 @@ char	**ft_create_map(char **map, t_game *game)
 
 	i = 0;
 	count = 0;
+	game->player_y = 0;
 	ft_search_tab(map, "1", &i);
 	start_map = i;
 	while(i >= 0 && map[i])
 	{
 		if (ft_check_carac(map[i], &count, game))
-				return (write(1, "Errors map format / caract\n", 27), map);
+				return (write(1, "Errors map format / caract\n", 27), ft_free_tab(map), NULL);
 		if (count && !game->player_y)
-			game->player_y = i - start_map; // vrai pos !!!!
+			game->player_y = i - start_map;
 		i++;
 	}
 	if (count != 1)

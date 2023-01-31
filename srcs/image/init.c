@@ -6,67 +6,11 @@
 /*   By: ilinhard <ilinhard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 11:47:15 by pbeheyt           #+#    #+#             */
-/*   Updated: 2023/01/31 02:49:33 by ilinhard         ###   ########.fr       */
+/*   Updated: 2023/01/31 03:33:04 by ilinhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
-
-int	press(int keycode, t_image *image)
-{
-	image->key = 0;
-	image->key = keycode;
-	return (0);
-}
-
-int release(int keycode, t_image *image)
-{
-	(void)keycode;
-	image->key = 0;
-	return (0);
-}
-
-void	move(t_image *image, double next_x, double next_y)
-{
-	if (image->game->map[(int)next_y][(int)next_x] == 'X')
-	{
-		image->player_pos.x = next_x;	
-		image->player_pos.y = next_y;
-	}
-}
-
-int	keyboard_input(int keycode, t_image *image)
-{
-	double	tmp;
-	
-	if (keycode == 65307)
-		exit_clean(image);
-	if (keycode == 'W' || keycode == 'w')
-		move(image, image->player_pos.x + image->player_dir.x * 0.05, image->player_pos.y + image->player_dir.y * 0.05);
-	if (keycode == 'S' || keycode == 's')
-		move(image, image->player_pos.x - image->player_dir.x * 0.05, image->player_pos.y - image->player_dir.y * 0.05);
-	if (keycode == 'A' || keycode == 'a')
-		move(image, image->player_pos.x - image->plane.x * 0.05, image->player_pos.y - image->plane.y * 0.05);
-	if (keycode == 'D' || keycode == 'd')
-		move(image, image->player_pos.x + image->plane.x * 0.05, image->player_pos.y + image->plane.y * 0.05);
-	if (keycode == 65361 || keycode == 'o')
-	{
-		image->player_dir.x = image->player_dir.x * cos(-0.02) - image->player_dir.y * sin(-0.02);
-		image->player_dir.y = image->player_dir.x * sin(-0.02) + image->player_dir.y * cos(-0.02);
-		tmp = image->plane.x;
-		image->plane.x = image->plane.x * cos(-0.02) - image->plane.y * sin(-0.02);
-		image->plane.y = tmp * sin(-0.02) + image->plane.y * cos(-0.02);
-	}
-	else if (keycode == 65363 || keycode == 'p')
-	{
-		image->player_dir.x = image->player_dir.x * cos(0.02) - image->player_dir.y * sin(0.02);
-		image->player_dir.y = image->player_dir.x * sin(0.02) + image->player_dir.y * cos(0.02);
-		tmp = image->plane.x;
-		image->plane.x = image->plane.x * cos(0.02) - image->plane.y * sin(0.02);
-		image->plane.y = tmp * sin(0.02) + image->plane.y * cos(0.02);
-	}
-	return (0);
-}
 
 t_texture	*file_to_image(t_image *image, char *path)
 {
@@ -88,7 +32,10 @@ t_texture	*file_to_image(t_image *image, char *path)
 	txt->content = mlx_xpm_file_to_image(image->mlx, txt->path,
 				&txt->size.width, &txt->size.height);
 	if (!txt->content)
+	{
+			write(2, "Errors loading texture\n", 23);
 			return (free(txt), exit_clean(image), NULL);
+	}
 	txt->buff = (int *)mlx_get_data_addr(txt->content, &bpp, &size_line, &endian);
 	return (txt);
 }
