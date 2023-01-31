@@ -6,10 +6,9 @@
 /*   By: ilinhard <ilinhard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 23:16:50 by ilinhard          #+#    #+#             */
-/*   Updated: 2023/01/31 03:49:51 by ilinhard         ###   ########.fr       */
+/*   Updated: 2023/01/31 03:51:17 by ilinhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "cub3d.h"
 
@@ -42,7 +41,6 @@ int	main(int ac, char **av)
 		return (ft_free_data_game(game), 1);
 	game->map = map;
 	image.game = game;
-	
 	init_mlx(&image, game);
 	ft_free_tab(map);
 	ft_free_data_game(game);

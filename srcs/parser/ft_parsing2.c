@@ -6,7 +6,7 @@
 /*   By: ilinhard <ilinhard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 00:37:38 by ilinhard          #+#    #+#             */
-/*   Updated: 2023/01/31 03:48:32 by ilinhard         ###   ########.fr       */
+/*   Updated: 2023/01/31 04:39:32 by ilinhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	ft_check_carac(char *str, int *count, t_game *game)
 	int	i;
 
 	i = 0;
-	while(str[i] && (str[i] == ' ' || str[i] == '\t'))
+	while (str[i] && (str[i] == ' ' || str[i] == '\t'))
 		i++;
 	while (str[i])
 	{
@@ -36,8 +36,6 @@ int	ft_check_carac(char *str, int *count, t_game *game)
 	return (0);
 }
 
-
-
 char	**ft_final_map(char **map, int start_map, int len)
 {
 	char	**final_map;
@@ -53,11 +51,11 @@ char	**ft_final_map(char **map, int start_map, int len)
 	while (map[start_map + i])
 	{
 		final_map[i] = ft_strdup(map[start_map + i]);
-		i++; 
+		i++;
 	}
 	final_map[i] = NULL;
 	ft_free_tab(map);
-	return(final_map);
+	return (final_map);
 }
 
 void	ft_verify_map_exit(char **map, int i, int j, int *exit)
@@ -75,7 +73,6 @@ void	ft_verify_map_exit(char **map, int i, int j, int *exit)
 	ft_verify_map_exit(map, i + 1, j, exit);
 	ft_verify_map_exit(map, i, j - 1, exit);
 	ft_verify_map_exit(map, i, j + 1, exit);
-	
 }
 
 char	**ft_create_map(char **map, t_game *game)
@@ -86,32 +83,23 @@ char	**ft_create_map(char **map, t_game *game)
 
 	i = 0;
 	count = 0;
-	game->player_y = 0;
 	ft_search_tab(map, "1", &i);
-	start_map = i;
-	while(i >= 0 && map[i])
+	start_map = i - 1;
+	while (++i >= 0 && map[i])
 	{
 		if (ft_check_carac(map[i], &count, game))
-				return (write(1, "Errors map format / caract\n", 27), ft_free_tab(map), NULL);
+			return (write(1, "Errors map:caract\n", 18), ft_free_tab(map), NULL);
 		if (count && !game->player_y)
 			game->player_y = i - start_map;
-		i++;
 	}
 	if (count != 1)
-	{
-		ft_free_tab(map);
-		write(1, "Errors map format / caract\n", 27);
-		return (NULL);
-	}
-	count = i - start_map;
-	map = ft_final_map(map, start_map, count);
+		return (ft_free_tab(map),
+			write(1, "Errors map format / caract\n", 27), NULL);
+	map = ft_final_map(map, start_map, (i - start_map));
 	count = 0;
 	map[game->player_y][game->player_x] = '0';
 	ft_verify_map_exit(map, game->player_y, game->player_x, &count);
 	if (count)
-	{
-		write(1, "Errors map have exit\n", 21);
-		return (ft_free_tab(map), NULL);
-	}
+		return (ft_free_tab(map), write(1, "Errors map have exit\n", 21), NULL);
 	return (map);
 }

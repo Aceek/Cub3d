@@ -6,7 +6,7 @@
 /*   By: ilinhard <ilinhard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 11:47:15 by pbeheyt           #+#    #+#             */
-/*   Updated: 2023/01/31 03:33:04 by ilinhard         ###   ########.fr       */
+/*   Updated: 2023/01/31 04:41:21 by ilinhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ t_texture	*file_to_image(t_image *image, char *path)
 	int			bpp;
 	int			endian;
 	int			size_line;
-	
+
 	bpp = 32;
 	endian = 1;
 	size_line = 0;
@@ -30,14 +30,25 @@ t_texture	*file_to_image(t_image *image, char *path)
 	ft_memset(txt, 0, sizeof(t_texture));
 	txt->path = path;
 	txt->content = mlx_xpm_file_to_image(image->mlx, txt->path,
-				&txt->size.width, &txt->size.height);
+			&txt->size.width, &txt->size.height);
 	if (!txt->content)
 	{
-			write(2, "Errors loading texture\n", 23);
-			return (free(txt), exit_clean(image), NULL);
+		write(2, "Errors loading texture\n", 23);
+		return (free(txt), exit_clean(image), NULL);
 	}
-	txt->buff = (int *)mlx_get_data_addr(txt->content, &bpp, &size_line, &endian);
+	txt->buff = \
+		(int *)mlx_get_data_addr(txt->content, &bpp, &size_line, &endian);
 	return (txt);
+}
+
+void	ft_init_default_player(t_image *image)
+{
+	image->player_pos.x = image->game->player_x + 0.5;
+	image->player_pos.y = image->game->player_y + 0.5;
+	image->player_dir.x = 0;
+	image->player_dir.y = -1;
+	image->plane.x = 0.66;
+	image->plane.y = 0;
 }
 
 void	init_image(t_image *image, t_game *game)
@@ -55,34 +66,29 @@ void	init_image(t_image *image, t_game *game)
 	image->east = file_to_image(image, game->east);
 }
 
-void    ft_init_diplay_struct(t_image *image, t_game *game)
+void	ft_init_diplay_struct(t_image *image, t_game *game)
 {
-    image->player_pos.x = image->game->player_x + 0.5;
-    image->player_pos.y = image->game->player_y + 0.5;
-    image->player_dir.x = 0;
-    image->player_dir.y = -1;
-    image->plane.x = 0.66;
-    image->plane.y = 0;
+	ft_init_default_player(image);
 	if (game->dir_player == 'E')
 	{
 		image->player_dir.x = 1;
-  		image->player_dir.y = 0;
-   		image->plane.x = 0;
-   		image->plane.y = 0.66;
+		image->player_dir.y = 0;
+		image->plane.x = 0;
+		image->plane.y = 0.66;
 	}
 	else if (game->dir_player == 'W')
 	{
 		image->player_dir.x = -1;
-  		image->player_dir.y = 0;
-   		image->plane.x = 0;
-   		image->plane.y = -0.66;
+		image->player_dir.y = 0;
+		image->plane.x = 0;
+		image->plane.y = -0.66;
 	}
 	else if (game->dir_player == 'S')
 	{
 		image->player_dir.x = 0;
-  		image->player_dir.y = 1;
-   		image->plane.x = -0.66;
-   		image->plane.y = 0;
+		image->player_dir.y = 1;
+		image->plane.x = -0.66;
+		image->plane.y = 0;
 	}
 }
 
