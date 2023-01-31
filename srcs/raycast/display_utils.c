@@ -6,7 +6,7 @@
 /*   By: ilinhard <ilinhard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 02:32:33 by ilinhard          #+#    #+#             */
-/*   Updated: 2023/01/31 04:24:17 by ilinhard         ###   ########.fr       */
+/*   Updated: 2023/01/31 06:57:35 by ilinhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ int	get_pxl_color(t_image *image, t_texture *txt, int start)
 		tex_x = txt->size.width - tex_x - 1;
 	color = start * 256 - image->size.height * 128 + image->line_height * 128;
 	tex_y = ((color * txt->size.height) / image->line_height) / 256;
+	if (tex_y < 0)
+		tex_y = 0;
 	color = txt->buff[(int)(tex_y * txt->size.width + tex_x)];
 	return (color);
 }
