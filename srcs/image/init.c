@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pbeheyt <pbeheyt@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ilinhard <ilinhard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 11:47:15 by pbeheyt           #+#    #+#             */
-/*   Updated: 2023/01/30 07:02:46 by pbeheyt          ###   ########.fr       */
+/*   Updated: 2023/01/31 02:49:33 by ilinhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ void	init_image(t_image *image, t_game *game)
 	image->east = file_to_image(image, game->east);
 }
 
-void    ft_init_diplay_struct(t_image *image)
+void    ft_init_diplay_struct(t_image *image, t_game *game)
 {
     image->player_pos.x = image->game->player_x + 0.5;
     image->player_pos.y = image->game->player_y + 0.5;
@@ -116,13 +116,33 @@ void    ft_init_diplay_struct(t_image *image)
     image->player_dir.y = -1;
     image->plane.x = 0.66;
     image->plane.y = 0;
-    // init time
+	if (game->dir_player == 'E')
+	{
+		image->player_dir.x = 1;
+  		image->player_dir.y = 0;
+   		image->plane.x = 0;
+   		image->plane.y = 0.66;
+	}
+	else if (game->dir_player == 'W')
+	{
+		image->player_dir.x = -1;
+  		image->player_dir.y = 0;
+   		image->plane.x = 0;
+   		image->plane.y = -0.66;
+	}
+	else if (game->dir_player == 'S')
+	{
+		image->player_dir.x = 0;
+  		image->player_dir.y = 1;
+   		image->plane.x = -0.66;
+   		image->plane.y = 0;
+	}
 }
 
 int	init_mlx(t_image *image, t_game *game)
 {
 	init_image(image, game);
-	ft_init_diplay_struct(image);
+	ft_init_diplay_struct(image, game);
 	image->win = mlx_new_window(image->mlx, image->size.width,
 			image->size.height, "CUBE3D");
 	mlx_hook(image->win, 2, 1L << 0, &press, image);

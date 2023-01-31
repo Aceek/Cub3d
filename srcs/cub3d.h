@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pbeheyt <pbeheyt@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ilinhard <ilinhard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 23:17:42 by ilinhard          #+#    #+#             */
-/*   Updated: 2023/01/30 04:38:58 by pbeheyt          ###   ########.fr       */
+/*   Updated: 2023/01/31 02:42:17 by ilinhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ typedef struct s_texture
 
 typedef struct s_game
 {
+	char	dir_player;
 	char	*north;
 	char	*south;
 	char	*east;
@@ -95,11 +96,22 @@ typedef struct s_image
 	t_game		*game;
 }				t_image;
 
-int display(void *param);
+/*display*/
+void  		ft_init_ray(t_image *image, int x);
+void  		ft_dda(t_image *image);
+void  		ft_fill_img_buffer(int x, t_image *image);
+void  		ft_wall_dist_calculate(t_image *image);
+int			display(void *param);
+/*display_utils*/
+void    	ft_calculate_side_dist(t_image *image);
+void    	ft_floor_and_celling(t_image *image);
+int			get_pxl_color(t_image *image, t_texture *txt, int start);
+t_texture	*ft_init_display(t_image *image);
+
 
 /*image/clear*/
-void	free_txt(t_image *image, t_texture *txt);
-int		exit_clean(t_image *image);
+void		free_txt(t_image *image, t_texture *txt);
+int			exit_clean(t_image *image);
 
 /*image/init*/
 int			keyboard_input(int keycode, t_image *image);
@@ -108,22 +120,22 @@ void		init_txt(t_image *image, t_game *game);
 int			init_mlx(t_image *image, t_game *game);
 
 /*libft*/
-char	**ft_split(char const *s, char c);
-void	*ft_memset(void *s, int c, size_t n);
+char		**ft_split(char const *s, char c);
+void		*ft_memset(void *s, int c, size_t n);
 
 /*parsing*/
-char	**ft_init_parsing(char *file, t_game *game);
-int		ft_strlen(char *str);
-void	ft_free_tab(char **tab);
-int		ft_search_tab(char **tab, char *to_find, int *pos);
-char	*ft_cpy(char *str);
-void	ft_free_data_game(t_game *game);
-int		ft_make_color(char *str);
-int		ft_atoi(char *str, int *pos);
-int		ft_encode_rgb(int red, int green, int blue);
-char	*ft_strjoin(char *s1, char *s2);
-int		ft_find(char *str, char *to_find);
-char	**ft_create_map(char **map, t_game *game);
-char	*ft_strdup(const char *s);
+char		**ft_init_parsing(char *file, t_game *game);
+int			ft_strlen(char *str);
+void		ft_free_tab(char **tab);
+int			ft_search_tab(char **tab, char *to_find, int *pos);
+char		*ft_cpy(char *str);
+void		ft_free_data_game(t_game *game);
+int			ft_make_color(char *str);
+int			ft_atoi(char *str, int *pos);
+int			ft_encode_rgb(int red, int green, int blue);
+char		*ft_strjoin(char *s1, char *s2);
+int			ft_find(char *str, char *to_find);
+char		**ft_create_map(char **map, t_game *game);
+char		*ft_strdup(const char *s);
 
 #endif

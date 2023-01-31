@@ -6,7 +6,7 @@
 /*   By: ilinhard <ilinhard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 00:37:38 by ilinhard          #+#    #+#             */
-/*   Updated: 2023/01/25 04:46:30 by ilinhard         ###   ########.fr       */
+/*   Updated: 2023/01/31 02:48:10 by ilinhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ int	ft_check_carac(char *str, int *count, t_game *game)
 		{
 			*count += 1;
 			game->player_x = i;
+			game->dir_player = str[i];
 		}
 		if (str[i] == 'N' || str[i] == 'W' || str[i] == 'S' || str[i] == 'E'
 			|| str[i] == '0' || str[i] == '1' || str[i] == ' ')

@@ -1,8 +1,8 @@
 
 SO ./txt/metal.xpm
-WE ./txt/metal.xpm
-EA ./txt/metal.xpm
-NO ./txt/metal.xpm
+WE ./txt/rock.xpm
+EA ./txt/plank.xpm
+NO ./txt/weird.xpm
 
 F 0,0,0
 C 255,255,0
