@@ -6,7 +6,7 @@
 /*   By: ilinhard <ilinhard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 11:47:15 by pbeheyt           #+#    #+#             */
-/*   Updated: 2023/01/31 04:03:49 by ilinhard         ###   ########.fr       */
+/*   Updated: 2023/02/17 23:48:05 by ilinhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ void	ft_fill_img_buffer(int x, t_image *image)
 		wall = image->east;
 	else if (image->raydir.x < 0 && !image->side)
 		wall = image->west;
-	else if (image->raydir.y < 0 && !image->side)
+	else if (image->raydir.y < 0 && image->side)
 		wall = image->north;
 	else
 		wall = image->south;
