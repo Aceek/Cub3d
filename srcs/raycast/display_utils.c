@@ -6,7 +6,7 @@
 /*   By: ilinhard <ilinhard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 02:32:33 by ilinhard          #+#    #+#             */
-/*   Updated: 2023/02/18 02:27:31 by ilinhard         ###   ########.fr       */
+/*   Updated: 2023/02/18 02:28:56 by ilinhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	get_pxl_color(t_image *image, t_texture *txt, int y)
 	if (image->side == 1 && image->raydir.y < 0)
 		tex_x = txt->size.width - tex_x - 1;
 	tex_y = (((y * 2 - image->size.height + image->line_height)
-		* txt->size.height) / image->line_height) / 2;
+				* txt->size.height) / image->line_height) / 2;
 	if (tex_y < 0)
 		tex_y = 0;
 	color = txt->buff[(int)(tex_y * txt->size.width + tex_x)];
