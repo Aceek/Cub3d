@@ -6,7 +6,7 @@
 /*   By: ilinhard <ilinhard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 23:17:42 by ilinhard          #+#    #+#             */
-/*   Updated: 2023/02/18 04:25:15 by ilinhard         ###   ########.fr       */
+/*   Updated: 2023/02/18 22:04:44 by ilinhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 
 # define BUFFER_SIZE 50
 
+# define MINI_MAP 18
 # define TILE_SIZE 10
 
 typedef struct s_size
