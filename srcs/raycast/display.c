@@ -6,7 +6,7 @@
 /*   By: ilinhard <ilinhard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 11:47:15 by pbeheyt           #+#    #+#             */
-/*   Updated: 2023/02/18 02:24:15 by ilinhard         ###   ########.fr       */
+/*   Updated: 2023/02/18 06:16:39 by ilinhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,91 @@ void	ft_fill_img_buffer(int x, t_image *image)
 	}
 }
 
+void	print_tile_wall(int x, int y, t_image *image, int color)
+{
+	int x_max;
+	int	y_max;
+	int	y_init;
+
+	x_max = x + TILE_SIZE;
+	y_max = y + TILE_SIZE;
+	y_init = y;
+
+	while (x < x_max)
+	{
+		y = y_init;
+		while (y < y_max)
+		{
+			image->global_image->buff[x + y * image->size.width] = color;
+			y++;
+		}
+		x++;
+	}
+}
+
+void	print_tile_player(int x, int y, t_image *image, int color)
+{
+	int x_max;
+	int	y_max;
+
+	x_max = x + (0.5 * TILE_SIZE);
+	y_max = y + (0.5 * TILE_SIZE);
+	
+	x -= 0.5 * TILE_SIZE;
+	while (x < x_max)
+	{
+		y = y_max - TILE_SIZE;
+		while (y < y_max)
+		{
+			image->global_image->buff[x + y * image->size.width] = color;
+			y++;
+		}
+		x++;
+	}
+}
+
+void	print_mini_map(t_image *image)
+{
+	int	x;
+	int	y;
+	int back_color;
+	int	player_color;
+	int	wall_color;
+
+	back_color = ft_encode_rgb(56, 62, 66);
+	player_color = ft_encode_rgb(255, 255, 255);
+	wall_color = ft_encode_rgb(0, 0, 0);
+	x = -1;
+	while (++x < 18 * TILE_SIZE)
+	{
+		y  = -1;
+		while (++y < 18 * TILE_SIZE)
+			image->global_image->buff[y + x * image->size.width] = back_color;
+	}
+	print_tile_player(TILE_SIZE * 9, TILE_SIZE * 9, image, player_color);
+	int	start_y;
+	int start_x = (int)image->player_pos.x - 7;
+	int test_x = 1;
+	int test_y = 1;
+	while (start_x < (int)image->player_pos.x + 7)
+	{
+		start_y = (int)image->player_pos.y - 7;
+		test_y = 1;
+		while (start_y < (int)image->player_pos.y + 7)
+		{
+			if (start_x >= 0 && start_y >= 0 && image->game->map[start_y][start_x] && image->game->map[start_y][start_x] == '1')
+			{
+				print_tile_wall(test_x * TILE_SIZE , test_y * TILE_SIZE, image, wall_color);
+			}
+			test_y++;
+			start_y++;
+		}
+		start_x++;
+		test_x++;
+	}
+	
+}
+
 int	display(void *param)
 {
 	t_image	*image;
@@ -106,6 +191,7 @@ int	display(void *param)
 		ft_wall_dist_calculate(image);
 		ft_fill_img_buffer(x, image);
 	}
+	print_mini_map(image);
 	mlx_put_image_to_window(image->mlx, image->win,
 		image->global_image->content, 0, 0);
 	mlx_destroy_image(image->mlx, image->global_image->content);
