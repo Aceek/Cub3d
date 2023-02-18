@@ -1,6 +1,6 @@
-NO ./txt/metal.xpm
+NO ./txt/scary_wall2.xpm
 SO ./txt/scary_wall.xpm
-WE ./txt/rock.xpm
+WE ./txt/metal.xpm
 EA ./txt/plank.xpm
 
 C 255,255,255
