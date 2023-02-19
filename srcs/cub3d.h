@@ -6,7 +6,7 @@
 /*   By: ilinhard <ilinhard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 23:17:42 by ilinhard          #+#    #+#             */
-/*   Updated: 2023/02/19 01:43:58 by ilinhard         ###   ########.fr       */
+/*   Updated: 2023/02/19 04:15:44 by ilinhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,12 @@
 
 # define MMAP 25
 # define TILE 7
-# define GRAY 0x808080
 # define BLACK 0x000000
-# define WHITE 0xFFFFFF
-# define BLUE 0x0000FF
 # define RED 0xFF0000
-# define YELLOW 0xFFFF00
-# define GREEN 0x008000
 # define DARK_GRAY 0x555555
+# define SPEED 0.09
+# define ROTATION 0.03
+# define FOV 0.66
 
 typedef struct s_size
 {
@@ -86,6 +84,7 @@ typedef struct s_image
 	t_pos		side_dist;
 	t_pos		delta_dist;
 	t_posi		step;
+	t_posi		mouse;
 	int			key;
 	int			draw_start;
 	int			line_height;
@@ -112,7 +111,9 @@ void		ft_init_ray(t_image *image, int x);
 void		ft_dda(t_image *image);
 void		ft_fill_img_buffer(int x, t_image *image);
 void		ft_wall_dist_calculate(t_image *image);
+void		mouse_motion(t_image *image);
 int			display(void *param);
+
 /*display_utils*/
 void		ft_calculate_side_dist(t_image *image);
 void		ft_floor_and_celling(t_image *image);
@@ -124,6 +125,7 @@ int			press(int keycode, t_image *image);
 int			release(int keycode, t_image *image);
 void		move(t_image *image, double next_x, double next_y);
 int			keyboard_input(int keycode, t_image *image);
+void		ft_camera_movement(int keycode, t_image *image);
 
 /*image/clear*/
 void		free_txt(t_image *image, t_texture *txt);

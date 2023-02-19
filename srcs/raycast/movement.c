@@ -6,7 +6,7 @@
 /*   By: ilinhard <ilinhard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 03:32:07 by ilinhard          #+#    #+#             */
-/*   Updated: 2023/01/31 04:27:31 by ilinhard         ###   ########.fr       */
+/*   Updated: 2023/02/19 02:44:33 by ilinhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,25 +42,25 @@ void	ft_camera_movement(int keycode, t_image *image)
 	if (keycode == 65361 || keycode == 'o')
 	{
 		image->player_dir.x = \
-			image->player_dir.x * cos(-0.02) - image->player_dir.y * sin(-0.02);
+			image->player_dir.x * cos(-ROTATION) - image->player_dir.y * sin(-ROTATION);
 		image->player_dir.y = \
-			image->player_dir.x * sin(-0.02) + image->player_dir.y * cos(-0.02);
+			image->player_dir.x * sin(-ROTATION) + image->player_dir.y * cos(-ROTATION);
 		tmp = image->plane.x;
 		image->plane.x = \
-			image->plane.x * cos(-0.02) - image->plane.y * sin(-0.02);
+			image->plane.x * cos(-ROTATION) - image->plane.y * sin(-ROTATION);
 		image->plane.y = \
-			tmp * sin(-0.02) + image->plane.y * cos(-0.02);
+			tmp * sin(-ROTATION) + image->plane.y * cos(-ROTATION);
 	}
 	else if (keycode == 65363 || keycode == 'p')
 	{
 		image->player_dir.x = \
-			image->player_dir.x * cos(0.02) - image->player_dir.y * sin(0.02);
+			image->player_dir.x * cos(ROTATION) - image->player_dir.y * sin(ROTATION);
 		image->player_dir.y = \
-			image->player_dir.x * sin(0.02) + image->player_dir.y * cos(0.02);
+			image->player_dir.x * sin(ROTATION) + image->player_dir.y * cos(ROTATION);
 		tmp = image->plane.x;
 		image->plane.x = \
-			image->plane.x * cos(0.02) - image->plane.y * sin(0.02);
-		image->plane.y = tmp * sin(0.02) + image->plane.y * cos(0.02);
+			image->plane.x * cos(ROTATION) - image->plane.y * sin(ROTATION);
+		image->plane.y = tmp * sin(ROTATION) + image->plane.y * cos(ROTATION);
 	}
 }
 
@@ -69,17 +69,17 @@ int	keyboard_input(int keycode, t_image *image)
 	if (keycode == 65307)
 		exit_clean(image);
 	if (keycode == 'W' || keycode == 'w')
-		move(image, image->player_pos.x + image->player_dir.x * 0.05,
-			image->player_pos.y + image->player_dir.y * 0.05);
+		move(image, image->player_pos.x + image->player_dir.x * SPEED,
+			image->player_pos.y + image->player_dir.y * SPEED);
 	if (keycode == 'S' || keycode == 's')
-		move(image, image->player_pos.x - image->player_dir.x * 0.05,
-			image->player_pos.y - image->player_dir.y * 0.05);
+		move(image, image->player_pos.x - image->player_dir.x * SPEED,
+			image->player_pos.y - image->player_dir.y * SPEED);
 	if (keycode == 'A' || keycode == 'a')
-		move(image, image->player_pos.x - image->plane.x * 0.05,
-			image->player_pos.y - image->plane.y * 0.05);
+		move(image, image->player_pos.x - image->plane.x * SPEED,
+			image->player_pos.y - image->plane.y * SPEED);
 	if (keycode == 'D' || keycode == 'd')
-		move(image, image->player_pos.x + image->plane.x * 0.05,
-			image->player_pos.y + image->plane.y * 0.05);
+		move(image, image->player_pos.x + image->plane.x * SPEED,
+			image->player_pos.y + image->plane.y * SPEED);
 	ft_camera_movement(keycode, image);
 	return (0);
 }

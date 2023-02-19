@@ -6,7 +6,7 @@
 /*   By: ilinhard <ilinhard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 11:47:15 by pbeheyt           #+#    #+#             */
-/*   Updated: 2023/01/31 04:41:21 by ilinhard         ###   ########.fr       */
+/*   Updated: 2023/02/19 04:13:31 by ilinhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	ft_init_default_player(t_image *image)
 	image->player_pos.y = image->game->player_y + 0.5;
 	image->player_dir.x = 0;
 	image->player_dir.y = -1;
-	image->plane.x = 0.66;
+	image->plane.x = FOV;
 	image->plane.y = 0;
 }
 
@@ -74,20 +74,20 @@ void	ft_init_diplay_struct(t_image *image, t_game *game)
 		image->player_dir.x = 1;
 		image->player_dir.y = 0;
 		image->plane.x = 0;
-		image->plane.y = 0.66;
+		image->plane.y = FOV;
 	}
 	else if (game->dir_player == 'W')
 	{
 		image->player_dir.x = -1;
 		image->player_dir.y = 0;
 		image->plane.x = 0;
-		image->plane.y = -0.66;
+		image->plane.y = -FOV;
 	}
 	else if (game->dir_player == 'S')
 	{
 		image->player_dir.x = 0;
 		image->player_dir.y = 1;
-		image->plane.x = -0.66;
+		image->plane.x = -FOV;
 		image->plane.y = 0;
 	}
 }
@@ -101,7 +101,9 @@ int	init_mlx(t_image *image, t_game *game)
 	mlx_hook(image->win, 2, 1L << 0, &press, image);
 	mlx_hook(image->win, 3, 1L << 1, &release, image);
 	mlx_hook(image->win, 17, 0, exit_clean, image);
+	mlx_mouse_get_pos(image->mlx, image->win, &image->mouse.x, &image->mouse.y);
 	mlx_loop_hook(image->mlx, &display, image);
+	
 	mlx_loop(image->mlx);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: ilinhard <ilinhard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 11:47:15 by pbeheyt           #+#    #+#             */
-/*   Updated: 2023/02/19 01:43:38 by ilinhard         ###   ########.fr       */
+/*   Updated: 2023/02/19 04:15:13 by ilinhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,15 +87,27 @@ void	ft_fill_img_buffer(int x, t_image *image)
 	}
 }
 
+void	mouse_motion(t_image *image)
+{
+	int compare;
+	
+	mlx_mouse_get_pos(image->mlx, image->win, &compare, &image->mouse.y);
+	if (compare > image->mouse.x || compare >= image->size.width)
+		ft_camera_movement('p', image);
+	else if (compare < image->mouse.x || compare <= 0)
+		ft_camera_movement('o', image);
+	image->mouse.x = compare;
+}
+
 int	display(void *param)
 {
 	t_image	*image;
 	int		x;
-
 	image = (t_image *)param;
 	image->global_image = ft_init_display(image);
 	ft_floor_and_celling(image);
 	x = -1;
+	mouse_motion(image);
 	while (++x < image->size.width)
 	{
 		image->map.x = image->player_pos.x;
