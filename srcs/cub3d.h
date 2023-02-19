@@ -6,7 +6,7 @@
 /*   By: ilinhard <ilinhard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 23:17:42 by ilinhard          #+#    #+#             */
-/*   Updated: 2023/02/18 22:04:44 by ilinhard         ###   ########.fr       */
+/*   Updated: 2023/02/19 01:43:58 by ilinhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,16 @@
 
 # define BUFFER_SIZE 50
 
-# define MINI_MAP 18
-# define TILE_SIZE 10
+# define MMAP 25
+# define TILE 7
+# define GRAY 0x808080
+# define BLACK 0x000000
+# define WHITE 0xFFFFFF
+# define BLUE 0x0000FF
+# define RED 0xFF0000
+# define YELLOW 0xFFFF00
+# define GREEN 0x008000
+# define DARK_GRAY 0x555555
 
 typedef struct s_size
 {
@@ -126,6 +134,12 @@ int			keyboard_input(int keycode, t_image *image);
 t_texture	*file_to_image(t_image *image, char *path);
 void		init_txt(t_image *image, t_game *game);
 int			init_mlx(t_image *image, t_game *game);
+
+/*image/mini_map*/
+void		print_tile(int x, int y, t_image *image, int color);
+void		print_map_back(t_image *image);
+void		print_mini_map(t_image *image);
+void		draw_map(t_image *image, t_posi len, t_posi pos, t_posi draw);
 
 /*libft*/
 char		**ft_split(char const *s, char c);

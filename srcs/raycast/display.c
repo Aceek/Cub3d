@@ -6,7 +6,7 @@
 /*   By: ilinhard <ilinhard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 11:47:15 by pbeheyt           #+#    #+#             */
-/*   Updated: 2023/02/MINI_MAP 06:16:39 by ilinhard         ###   ########.fr       */
+/*   Updated: 2023/02/19 01:43:38 by ilinhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,70 +85,6 @@ void	ft_fill_img_buffer(int x, t_image *image)
 		image->global_image->buff[(image->size.width * start) + x] = color_txt;
 		start += 1;
 	}
-}
-
-void	print_tile(int x, int y, t_image *image, int color)
-{
-	int x_max;
-	int	y_max;
-	int	y_init;
-
-	x_max = x + TILE_SIZE;
-	y_max = y + TILE_SIZE;
-	y_init = y;
-
-	while (x < x_max)
-	{
-		y = y_init;
-		while (y < y_max)
-		{
-			image->global_image->buff[x + y * image->size.width] = color;
-			y++;
-		}
-		x++;
-	}
-}
-
-void	print_mini_map(t_image *image)
-{
-	int	x;
-	int	y;
-	int back_color;
-	int	player_color;
-	int	wall_color;
-
-	back_color = ft_encode_rgb(56, 62, 66);
-	player_color = ft_encode_rgb(255, 255, 255);
-	wall_color = ft_encode_rgb(0, 0, 0);
-	x = -1;
-	while (++x < MINI_MAP * TILE_SIZE)
-	{
-		y  = -1;
-		while (++y < MINI_MAP * TILE_SIZE)
-			image->global_image->buff[y + x * image->size.width] = back_color;
-	}
-	print_tile(TILE_SIZE * (MINI_MAP / 2), TILE_SIZE * (MINI_MAP / 2), image, player_color);
-	int	start_y;
-	int start_x = (int)image->player_pos.x - ((MINI_MAP / 2) - 1);
-	int test_x = 1;
-	int test_y = 1;
-	while (start_x < (int)image->player_pos.x + ((MINI_MAP / 2) - 1))
-	{
-		start_y = (int)image->player_pos.y - ((MINI_MAP / 2) - 1);
-		test_y = 1;
-		while (start_y < (int)image->player_pos.y + ((MINI_MAP / 2) - 1))
-		{
-			if (start_x >= 0 && start_y >= 0 && image->game->map[start_y][start_x] && image->game->map[start_y][start_x] == '1')
-			{
-				print_tile(test_x * TILE_SIZE , test_y * TILE_SIZE, image, wall_color);
-			}
-			test_y++;
-			start_y++;
-		}
-		start_x++;
-		test_x++;
-	}
-	
 }
 
 int	display(void *param)

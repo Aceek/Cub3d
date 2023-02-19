@@ -11,7 +11,7 @@ SUB_OBJ			=	obj/parser obj/libft obj/image obj/raycast
 SRC				=	cub3d.c \
 					libft/ft_split.c libft/ft_memset.c libft/libft.c\
 					parser/ft_parsing.c parser/ft_utils.c parser/ft_utils2.c parser/ft_parsing2.c\
-					image/init.c image/clear.c image/mini_map.c \
+					image/init.c image/clear.c \
 					raycast/display.c raycast/display_utils.c raycast/movement.c
 
 OBJ				=	$(SRC:%.c=$(DIR_OBJ)/%.o)
@@ -20,13 +20,13 @@ CC					=	gcc
 
 MLX_FLAGS			=	-lm -lmlx -lXext -lX11
 
-CFLAGS				=	-Wall -Werror -Wextra -g -MMD -MP #-fsanitize=address
+CFLAGS				=	-Wall -Werror -Wextra -g -fsanitize=address -MMD -MP
 
 LD_FLAGS			=	-L mlx_linux
 
 $(DIR_OBJ)/%.o:		$(DIR_SRC)/%.c Makefile
 					mkdir -p $(DIR_OBJ) $(SUB_OBJ)
-					$(CC) $(CFLAGS) -MMD -c $< -o $@
+					$(CC) $(CFLAGS) -c $< -o $@
 
 ${NAME}				:	${OBJ}
 					make -C mlx_linux
