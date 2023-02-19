@@ -10,7 +10,7 @@ SUB_OBJ			=	obj/parser obj/libft obj/image obj/raycast
 
 SRC				=	cub3d.c \
 					libft/ft_split.c libft/ft_memset.c libft/libft.c\
-					parser/ft_parsing.c parser/ft_utils.c parser/ft_utils2.c parser/ft_parsing2.c\
+					parser/ft_parsing.c parser/ft_utils.c parser/ft_utils2.c parser/ft_parsing2.c parser/ft_animation.c \
 					image/init.c image/clear.c image/mini_map.c \
 					raycast/display.c raycast/display_utils.c raycast/movement.c
 

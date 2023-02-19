@@ -6,7 +6,7 @@
 /*   By: ilinhard <ilinhard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 23:17:42 by ilinhard          #+#    #+#             */
-/*   Updated: 2023/02/19 22:37:09 by ilinhard         ###   ########.fr       */
+/*   Updated: 2023/02/20 00:34:59 by ilinhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,16 +58,19 @@ typedef struct s_text_list
 
 typedef struct s_game
 {
-	char	dir_player;
-	char	*north;
-	char	*south;
-	char	*east;
-	char	*west;
-	int		color_f;
-	int		color_c;
-	int		player_x;
-	int		player_y;
-	char	**map;
+	char		dir_player;
+	char		*north;
+	char		*south;
+	char		*east;
+	char		*west;
+	int			animation;
+	int			color_f;
+	int			color_c;
+	int			player_x;
+	int			player_y;
+	char		**map;
+	t_text_list	*head;
+
 }			t_game;
 
 typedef struct s_pos
@@ -155,6 +158,8 @@ void		draw_map(t_image *image, t_posi len, t_posi pos, t_posi draw);
 /*libft*/
 char		**ft_split(char const *s, char c);
 void		*ft_memset(void *s, int c, size_t n);
+char		*ft_itoa(long long nbr);
+char		*ft_strjoin2(const char *s1, char *s2);
 
 /*parsing*/
 char		**ft_init_parsing(char *file, t_game *game);
@@ -170,5 +175,6 @@ char		*ft_strjoin(char *s1, char *s2);
 int			ft_find(char *str, char *to_find);
 char		**ft_create_map(char **map, t_game *game);
 char		*ft_strdup(const char *s);
+int			ft_animation(char **map_file, t_game *game);
 
 #endif

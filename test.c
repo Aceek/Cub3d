@@ -1,42 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libft.c                                            :+:      :+:    :+:   */
+/*   test.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ilinhard <ilinhard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/25 03:14:58 by ilinhard          #+#    #+#             */
-/*   Updated: 2023/02/20 00:30:43 by ilinhard         ###   ########.fr       */
+/*   Created: 2023/02/19 22:49:59 by ilinhard          #+#    #+#             */
+/*   Updated: 2023/02/19 23:43:53 by ilinhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub3d.h"
 
-char	*ft_strdup(const char *s)
-{
-	int			i;
-	char		*cpy;
-
-	if (s == NULL)
-		return (NULL);
-	i = ft_strlen((char *)s);
-	cpy = malloc(sizeof(char) * (i + 1));
-	if (cpy == NULL)
-		return (NULL);
-	i = 0;
-	while (s[i])
-	{
-		cpy[i] = s[i];
-		i++;
-	}
-	cpy[i] = '\0';
-	return (cpy);
-}
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
 
 int	ft_count_nbr(int nbr)
 {
 	int			i;
-	long long	count;
+	long long count;
 
 	i = 0;
 	count = nbr;
@@ -58,8 +40,8 @@ char	*ft_itoa(long long nbr)
 	char	*str;
 	int		len;
 	int		sign;
-
 	len = ft_count_nbr(nbr);
+	
 	sign = 0;
 	str = malloc(sizeof(char) * (len + 1));
 	if (!str)
@@ -80,4 +62,11 @@ char	*ft_itoa(long long nbr)
 	if (sign)
 		str[0] = '-';
 	return (str);
+}
+
+int	main(void)
+{
+	int nbr = 1;
+	printf("len : %d\n", ft_count_nbr(nbr));
+	printf("nbr : %s\n", ft_itoa(nbr));
 }
