@@ -6,7 +6,7 @@
 /*   By: ilinhard <ilinhard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 23:17:42 by ilinhard          #+#    #+#             */
-/*   Updated: 2023/02/19 04:15:44 by ilinhard         ###   ########.fr       */
+/*   Updated: 2023/02/19 22:37:09 by ilinhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,14 @@ typedef struct s_texture
 	void	*txt;
 	int		*buff;
 }			t_texture;
+
+typedef struct s_text_list
+{
+	t_texture				*north;
+	char					*path;
+	int						i;
+	struct s_text_list		*next;
+}							t_text_list;
 
 typedef struct s_game
 {
@@ -100,6 +108,7 @@ typedef struct s_image
 	t_texture	*east;
 	t_texture	*west;
 	t_texture	*global_image;
+	t_text_list	*head;
 	int			color_f;
 	int			color_c;
 	t_size		size;
