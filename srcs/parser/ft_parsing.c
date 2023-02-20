@@ -6,7 +6,7 @@
 /*   By: ilinhard <ilinhard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 00:33:26 by ilinhard          #+#    #+#             */
-/*   Updated: 2023/02/20 01:12:35 by ilinhard         ###   ########.fr       */
+/*   Updated: 2023/02/20 01:27:24 by ilinhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,12 +63,12 @@ int	ft_check_texture(char **map_file, t_game *game)
 {
 	int	i;
 
+	game->head = NULL;
 	i = 0;
 	if (!map_file)
 		return (1);
 	if (ft_search_tab(map_file, "NO", &i) >= 0)
 		game->north = ft_cpy(map_file[i]);
-	ft_animation(map_file, game);
 	if (ft_search_tab(map_file, "SO", &i) >= 0)
 		game->south = ft_cpy(map_file[i]);
 	if (ft_search_tab(map_file, "WE", &i) >= 0)
@@ -80,6 +80,8 @@ int	ft_check_texture(char **map_file, t_game *game)
 		write(1, "Errors texture path\n", 20);
 		return (1);
 	}
+	ft_list_add_back(&game->head, game->north, 0, game);
+	ft_animation(map_file, game);
 	return (0);
 }
 

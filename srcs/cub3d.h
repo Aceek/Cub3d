@@ -6,7 +6,7 @@
 /*   By: ilinhard <ilinhard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 23:17:42 by ilinhard          #+#    #+#             */
-/*   Updated: 2023/02/20 01:14:15 by ilinhard         ###   ########.fr       */
+/*   Updated: 2023/02/20 01:23:32 by ilinhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -177,5 +177,6 @@ int			ft_find(char *str, char *to_find);
 char		**ft_create_map(char **map, t_game *game);
 char		*ft_strdup(const char *s);
 int			ft_animation(char **map_file, t_game *game);
+void		ft_list_add_back(t_text_list **head, char *path, int pos, t_game *game);
 
 #endif

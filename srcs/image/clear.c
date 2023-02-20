@@ -6,7 +6,7 @@
 /*   By: ilinhard <ilinhard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 11:47:15 by pbeheyt           #+#    #+#             */
-/*   Updated: 2023/02/19 04:13:35 by ilinhard         ###   ########.fr       */
+/*   Updated: 2023/02/20 01:20:06 by ilinhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ int	exit_clean(t_image *image)
 	free_txt(image, image->south);
 	free_txt(image, image->west);
 	free_txt(image, image->east);
+	free(image->global_image);
 	if (image->win)
 		mlx_destroy_window(image->mlx, image->win);
 	if (image->mlx)
