@@ -1,4 +1,7 @@
 NO ./txt/fire.xpm
+NO1 ./txt/fire1.xpm
+NO2 ./txt/fire2.xpm
+NO3 ./txt/fire3.xpm
 EA ./txt/metal.xpm
 SO ./txt/scary_wall.xpm
 WE ./txt/rock.xpm
