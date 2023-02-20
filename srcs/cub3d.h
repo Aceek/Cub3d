@@ -6,7 +6,7 @@
 /*   By: ilinhard <ilinhard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 23:17:42 by ilinhard          #+#    #+#             */
-/*   Updated: 2023/02/20 01:35:28 by ilinhard         ###   ########.fr       */
+/*   Updated: 2023/02/20 02:20:11 by ilinhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@
 # define SPEED 0.09
 # define ROTATION 0.03
 # define FOV 0.66
-# define TIMER 1
+# define TIMER 5
 # define SCRHGHT 720
 # define SCRWDTH 1480
 
@@ -106,8 +106,8 @@ typedef struct s_image
 	int			hit;
 	int			side;
 	int			count;
-    int			txt_nb;
-    int			txt_i;
+	int			txt_nb;
+	int			txt_i;
 	double		wall_dist;
 	double		camera_x;
 	void		*mlx;
@@ -128,23 +128,25 @@ typedef struct s_image
 void		ft_init_ray(t_image *image, int x);
 void		ft_dda(t_image *image);
 void		ft_fill_img_buffer(int x, t_image *image);
-void		ft_wall_dist_calculate(t_image *image);
-void		mouse_motion(t_image *image);
 int			display(void *param);
+void		ft_wall_dist_calculate(t_image *image);
 
 /*display_utils*/
-void		mouse_motion(t_image *image);
 void		ft_calculate_side_dist(t_image *image);
 void		ft_floor_and_celling(t_image *image);
 int			get_pxl_color(t_image *image, t_texture *txt, int start);
+void		animated_wall(t_image *image);
 t_texture	*ft_init_display(t_image *image);
 
 /*movement.c*/
-int			press(int keycode, t_image *image);
-int			release(int keycode, t_image *image);
 void		move(t_image *image, double next_x, double next_y);
 int			keyboard_input(int keycode, t_image *image);
 void		ft_camera_movement(int keycode, t_image *image);
+
+/*movement2.c*/
+int			press(int keycode, t_image *image);
+int			release(int keycode, t_image *image);
+void		mouse_motion(t_image *image);
 
 /*image/clear*/
 void		free_txt(t_image *image, t_texture *txt);
@@ -183,6 +185,7 @@ int			ft_find(char *str, char *to_find);
 char		**ft_create_map(char **map, t_game *game);
 char		*ft_strdup(const char *s);
 int			ft_animation(char **map_file, t_game *game);
-void		ft_list_add_back(t_text_list **head, char *path, int pos, t_game *game);
+void		ft_list_add_back(t_text_list **head, char *path,
+				int pos, t_game *game);
 
 #endif

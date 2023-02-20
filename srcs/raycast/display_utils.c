@@ -6,22 +6,32 @@
 /*   By: ilinhard <ilinhard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 02:32:33 by ilinhard          #+#    #+#             */
-/*   Updated: 2023/02/20 01:13:53 by ilinhard         ###   ########.fr       */
+/*   Updated: 2023/02/20 02:20:00 by ilinhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-void	mouse_motion(t_image *image)
+void	animated_wall(t_image *image)
 {
-	int	compare;
+	t_text_list	*tmp;
 
-	mlx_mouse_get_pos(image->mlx, image->win, &compare, &image->mouse.y);
-	if (compare > image->mouse.x || compare >= image->size.width)
-		ft_camera_movement('p', image);
-	else if (compare < image->mouse.x || compare <= 0)
-		ft_camera_movement('o', image);
-	image->mouse.x = compare;
+	if (image->txt_nb >= 1)
+	{
+		image->count += 1;
+		if (image->count == TIMER)
+		{
+			image->count = 0;
+			tmp = image->head;
+			while (tmp && tmp->i != image->txt_i)
+				tmp = tmp->next;
+			image->north = tmp->north;
+			if (image->txt_i < image->txt_nb - 1)
+				image->txt_i += 1;
+			else
+				image->txt_i = 0;
+		}
+	}
 }
 
 int	get_pxl_color(t_image *image, t_texture *txt, int y)

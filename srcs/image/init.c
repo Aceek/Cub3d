@@ -6,7 +6,7 @@
 /*   By: ilinhard <ilinhard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 11:47:15 by pbeheyt           #+#    #+#             */
-/*   Updated: 2023/02/20 01:41:28 by ilinhard         ###   ########.fr       */
+/*   Updated: 2023/02/20 02:13:08 by ilinhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,30 +51,30 @@ void	ft_init_default_player(t_image *image)
 	image->plane.y = 0;
 }
 
-void    init_image(t_image *image, t_game *game)
+void	init_image(t_image *image, t_game *game)
 {
-    t_text_list *tmp;
+	t_text_list	*tmp;
 
-    ft_memset(image, 0, sizeof(t_image));
-    image->mlx = mlx_init();
-    if (!image->mlx)
-        exit_clean(image);
-    image->game = game;
+	ft_memset(image, 0, sizeof(t_image));
+	image->mlx = mlx_init();
+	if (!image->mlx)
+		exit_clean(image);
+	image->game = game;
 	image->size.height = SCRHGHT;
-    image->size.width = SCRWDTH;
-    tmp = image->head;
-    while (tmp)
-    {
-        tmp->north = file_to_image(image, tmp->path);
-        image->txt_nb += 1;
-        tmp = tmp->next;
-    }
-    image->north = file_to_image(image, game->north);
-    image->south = file_to_image(image, game->south);
-    image->west = file_to_image(image, game->west);
-    image->east = file_to_image(image, game->east);
+	image->size.width = SCRWDTH;
+	image->head = game->head;
+	tmp = image->head;
+	while (tmp)
+	{
+		tmp->north = file_to_image(image, tmp->path);
+		image->txt_nb += 1;
+		tmp = tmp->next;
+	}
+	image->north = image->head->north;
+	image->south = file_to_image(image, game->south);
+	image->west = file_to_image(image, game->west);
+	image->east = file_to_image(image, game->east);
 }
-
 
 void	ft_init_diplay_struct(t_image *image, t_game *game)
 {

@@ -6,25 +6,11 @@
 /*   By: ilinhard <ilinhard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 03:32:07 by ilinhard          #+#    #+#             */
-/*   Updated: 2023/02/20 01:16:45 by ilinhard         ###   ########.fr       */
+/*   Updated: 2023/02/20 02:16:30 by ilinhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
-
-int	press(int keycode, t_image *image)
-{
-	image->key = 0;
-	image->key = keycode;
-	return (0);
-}
-
-int	release(int keycode, t_image *image)
-{
-	(void)keycode;
-	image->key = 0;
-	return (0);
-}
 
 void	move(t_image *image, double next_x, double next_y)
 {

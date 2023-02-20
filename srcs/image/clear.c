@@ -6,7 +6,7 @@
 /*   By: ilinhard <ilinhard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 11:47:15 by pbeheyt           #+#    #+#             */
-/*   Updated: 2023/02/20 01:20:06 by ilinhard         ###   ########.fr       */
+/*   Updated: 2023/02/20 02:21:11 by ilinhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,31 @@ void	free_txt(t_image *image, t_texture *txt)
 	free(txt);
 }
 
+void	ft_clear_list(t_image *image)
+{
+	t_text_list	*tmp;
+	t_text_list	*next;
+
+	tmp = image->head;
+	while (tmp)
+	{
+		next = tmp->next;
+		if (tmp->north && tmp->north->content)
+			mlx_destroy_image(image->mlx, tmp->north->content);
+		free(tmp->path);
+		free(tmp->north);
+		free(tmp);
+		tmp = next;
+	}
+}
+
 int	exit_clean(t_image *image)
 {
-	free_txt(image, image->north);
 	free_txt(image, image->south);
 	free_txt(image, image->west);
 	free_txt(image, image->east);
 	free(image->global_image);
+	ft_clear_list(image);
 	if (image->win)
 		mlx_destroy_window(image->mlx, image->win);
 	if (image->mlx)

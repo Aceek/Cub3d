@@ -6,7 +6,7 @@
 /*   By: ilinhard <ilinhard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 00:29:24 by ilinhard          #+#    #+#             */
-/*   Updated: 2023/02/20 01:21:30 by ilinhard         ###   ########.fr       */
+/*   Updated: 2023/02/20 01:54:08 by ilinhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,6 @@ int	ft_animation(char **map_file, t_game *game)
 	char	*tmp;
 	char	*tmp2;
 
-	game->head = NULL;
 	game->animation = 0;
 	i = 1;
 	pos = 0;
