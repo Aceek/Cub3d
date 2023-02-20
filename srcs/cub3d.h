@@ -6,7 +6,7 @@
 /*   By: ilinhard <ilinhard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 23:17:42 by ilinhard          #+#    #+#             */
-/*   Updated: 2023/02/20 01:23:32 by ilinhard         ###   ########.fr       */
+/*   Updated: 2023/02/20 01:35:28 by ilinhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,9 @@
 # define SPEED 0.09
 # define ROTATION 0.03
 # define FOV 0.66
+# define TIMER 1
+# define SCRHGHT 720
+# define SCRWDTH 1480
 
 typedef struct s_size
 {
@@ -102,6 +105,9 @@ typedef struct s_image
 	int			draw_end;
 	int			hit;
 	int			side;
+	int			count;
+    int			txt_nb;
+    int			txt_i;
 	double		wall_dist;
 	double		camera_x;
 	void		*mlx;

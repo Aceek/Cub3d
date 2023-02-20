@@ -6,7 +6,7 @@
 /*   By: ilinhard <ilinhard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 11:47:15 by pbeheyt           #+#    #+#             */
-/*   Updated: 2023/02/20 01:15:12 by ilinhard         ###   ########.fr       */
+/*   Updated: 2023/02/20 01:40:54 by ilinhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,28 @@ void	ft_fill_img_buffer(int x, t_image *image)
 	}
 }
 
+void	animated_wall(t_image *image)
+{
+	t_text_list	*tmp;
+
+	if (image->txt_nb >= 1)
+	{
+		image->count += 1;
+		if (image->count == TIMER)
+		{
+			image->count = 0;
+			tmp = image->head;
+			while (tmp && tmp->i != image->txt_i)
+				tmp = tmp->next;
+			image->north = tmp->north;
+			if (image->txt_i < image->txt_nb - 1)
+				image->txt_i += 1;
+			else
+				image->txt_i = 0;
+		}
+	}
+}
+
 int	display(void *param)
 {
 	t_image	*image;
@@ -96,7 +118,7 @@ int	display(void *param)
 	image->global_image = ft_init_display(image);
 	ft_floor_and_celling(image);
 	x = -1;
-	mouse_motion(image);
+	animated_wall(image);
 	while (++x < image->size.width)
 	{
 		image->map.x = image->player_pos.x;
@@ -113,5 +135,5 @@ int	display(void *param)
 	mlx_destroy_image(image->mlx, image->global_image->content);
 	if (image->key != 0)
 		keyboard_input(image->key, image);
-	return (free(image->global_image), 0);
+	return (mouse_motion(image), free(image->global_image), 0);
 }
