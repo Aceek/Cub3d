@@ -6,7 +6,7 @@
 /*   By: ilinhard <ilinhard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 11:47:15 by pbeheyt           #+#    #+#             */
-/*   Updated: 2023/02/20 02:20:27 by ilinhard         ###   ########.fr       */
+/*   Updated: 2023/02/20 03:53:37 by ilinhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 void	ft_init_ray(t_image *image, int x)
 {
+	image->map.x = image->player_pos.x;
+	image->map.y = image->player_pos.y;
 	image->hit = 0;
 	image->camera_x = (2 * x / (double)image->size.width) - 1;
 	image->raydir.x = image->player_dir.x + (image->plane.x * image->camera_x);
@@ -99,8 +101,6 @@ int	display(void *param)
 	animated_wall(image);
 	while (++x < image->size.width)
 	{
-		image->map.x = image->player_pos.x;
-		image->map.y = image->player_pos.y;
 		ft_init_ray(image, x);
 		ft_calculate_side_dist(image);
 		ft_dda(image);
@@ -113,5 +113,6 @@ int	display(void *param)
 	mlx_destroy_image(image->mlx, image->global_image->content);
 	if (image->key != 0)
 		keyboard_input(image->key, image);
-	return (mouse_motion(image), free(image->global_image), 0);
+	free(image->global_image);
+	return (mouse_motion(image), image->global_image = NULL, 0);
 }

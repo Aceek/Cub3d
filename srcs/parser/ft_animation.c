@@ -6,7 +6,7 @@
 /*   By: ilinhard <ilinhard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 00:29:24 by ilinhard          #+#    #+#             */
-/*   Updated: 2023/02/20 01:54:08 by ilinhard         ###   ########.fr       */
+/*   Updated: 2023/02/20 03:21:16 by ilinhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ void	ft_list_add_back(t_text_list **head, char *path, int pos, t_game *game)
 		tmp->path = path;
 		tmp->i = pos;
 		tmp->next = NULL;
+		tmp->north = NULL;
 		game->head = tmp;
 		return ;
 	}
@@ -54,6 +55,7 @@ void	ft_list_add_back(t_text_list **head, char *path, int pos, t_game *game)
 	tmp->next = malloc(sizeof(t_text_list));
 	if (!tmp)
 		return ;
+	tmp->next->north = NULL;
 	tmp->next->path = path;
 	tmp->next->i = pos;
 	tmp->next->next = NULL;

@@ -6,7 +6,7 @@
 /*   By: ilinhard <ilinhard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 00:33:26 by ilinhard          #+#    #+#             */
-/*   Updated: 2023/02/20 01:53:07 by ilinhard         ###   ########.fr       */
+/*   Updated: 2023/02/20 03:05:47 by ilinhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ int	ft_check_texture(char **map_file, t_game *game)
 		write(1, "Errors texture path\n", 20);
 		return (1);
 	}
-	ft_list_add_back(&game->head, game->north, 0, game);
+	ft_list_add_back(&game->head, ft_strdup(game->north), 0, game);
 	ft_animation(map_file, game);
 	return (0);
 }

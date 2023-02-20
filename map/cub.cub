@@ -1,10 +1,7 @@
-NO ./txt/fire.xpm
-NO1 ./txt/fire1.xpm
-NO2 ./txt/fire2.xpm
-NO3 ./txt/fire3.xpm
+NO  ./txt/fire.xpm
+EA ./txt/fire.xpm
 SO ./txt/scary_wall.xpm
 WE ./txt/metal.xpm
-EA ./txt/plank.xpm
 
 
 C 255,255,255
