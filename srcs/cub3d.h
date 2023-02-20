@@ -6,7 +6,7 @@
 /*   By: ilinhard <ilinhard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 23:17:42 by ilinhard          #+#    #+#             */
-/*   Updated: 2023/02/20 00:34:59 by ilinhard         ###   ########.fr       */
+/*   Updated: 2023/02/20 01:14:15 by ilinhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,6 +127,7 @@ void		mouse_motion(t_image *image);
 int			display(void *param);
 
 /*display_utils*/
+void		mouse_motion(t_image *image);
 void		ft_calculate_side_dist(t_image *image);
 void		ft_floor_and_celling(t_image *image);
 int			get_pxl_color(t_image *image, t_texture *txt, int start);

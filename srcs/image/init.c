@@ -6,7 +6,7 @@
 /*   By: ilinhard <ilinhard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 11:47:15 by pbeheyt           #+#    #+#             */
-/*   Updated: 2023/02/19 04:13:31 by ilinhard         ###   ########.fr       */
+/*   Updated: 2023/02/20 01:17:00 by ilinhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,6 @@ int	init_mlx(t_image *image, t_game *game)
 	mlx_hook(image->win, 17, 0, exit_clean, image);
 	mlx_mouse_get_pos(image->mlx, image->win, &image->mouse.x, &image->mouse.y);
 	mlx_loop_hook(image->mlx, &display, image);
-	
 	mlx_loop(image->mlx);
 	return (0);
 }

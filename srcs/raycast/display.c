@@ -6,7 +6,7 @@
 /*   By: ilinhard <ilinhard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 11:47:15 by pbeheyt           #+#    #+#             */
-/*   Updated: 2023/02/19 04:15:13 by ilinhard         ###   ########.fr       */
+/*   Updated: 2023/02/20 01:15:12 by ilinhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,22 +87,11 @@ void	ft_fill_img_buffer(int x, t_image *image)
 	}
 }
 
-void	mouse_motion(t_image *image)
-{
-	int compare;
-	
-	mlx_mouse_get_pos(image->mlx, image->win, &compare, &image->mouse.y);
-	if (compare > image->mouse.x || compare >= image->size.width)
-		ft_camera_movement('p', image);
-	else if (compare < image->mouse.x || compare <= 0)
-		ft_camera_movement('o', image);
-	image->mouse.x = compare;
-}
-
 int	display(void *param)
 {
 	t_image	*image;
 	int		x;
+
 	image = (t_image *)param;
 	image->global_image = ft_init_display(image);
 	ft_floor_and_celling(image);
@@ -122,8 +111,7 @@ int	display(void *param)
 	mlx_put_image_to_window(image->mlx, image->win,
 		image->global_image->content, 0, 0);
 	mlx_destroy_image(image->mlx, image->global_image->content);
-	free(image->global_image);
 	if (image->key != 0)
 		keyboard_input(image->key, image);
-	return (0);
+	return (free(image->global_image), 0);
 }

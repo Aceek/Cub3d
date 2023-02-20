@@ -6,7 +6,7 @@
 /*   By: ilinhard <ilinhard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 03:32:07 by ilinhard          #+#    #+#             */
-/*   Updated: 2023/02/19 02:44:33 by ilinhard         ###   ########.fr       */
+/*   Updated: 2023/02/20 01:16:45 by ilinhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,25 +41,25 @@ void	ft_camera_movement(int keycode, t_image *image)
 
 	if (keycode == 65361 || keycode == 'o')
 	{
-		image->player_dir.x = \
-			image->player_dir.x * cos(-ROTATION) - image->player_dir.y * sin(-ROTATION);
-		image->player_dir.y = \
-			image->player_dir.x * sin(-ROTATION) + image->player_dir.y * cos(-ROTATION);
+		image->player_dir.x = image->player_dir.x * cos(-ROTATION)
+			- image->player_dir.y * sin(-ROTATION);
+		image->player_dir.y = image->player_dir.x * sin(-ROTATION)
+			+ image->player_dir.y * cos(-ROTATION);
 		tmp = image->plane.x;
-		image->plane.x = \
-			image->plane.x * cos(-ROTATION) - image->plane.y * sin(-ROTATION);
+		image->plane.x = image->plane.x * cos(-ROTATION)
+			- image->plane.y * sin(-ROTATION);
 		image->plane.y = \
 			tmp * sin(-ROTATION) + image->plane.y * cos(-ROTATION);
 	}
 	else if (keycode == 65363 || keycode == 'p')
 	{
-		image->player_dir.x = \
-			image->player_dir.x * cos(ROTATION) - image->player_dir.y * sin(ROTATION);
-		image->player_dir.y = \
-			image->player_dir.x * sin(ROTATION) + image->player_dir.y * cos(ROTATION);
+		image->player_dir.x = image->player_dir.x * cos(ROTATION)
+			- image->player_dir.y * sin(ROTATION);
+		image->player_dir.y = image->player_dir.x * sin(ROTATION)
+			+ image->player_dir.y * cos(ROTATION);
 		tmp = image->plane.x;
-		image->plane.x = \
-			image->plane.x * cos(ROTATION) - image->plane.y * sin(ROTATION);
+		image->plane.x = image->plane.x * cos(ROTATION)
+			- image->plane.y * sin(ROTATION);
 		image->plane.y = tmp * sin(ROTATION) + image->plane.y * cos(ROTATION);
 	}
 }
