@@ -6,7 +6,7 @@
 /*   By: ilinhard <ilinhard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 23:17:42 by ilinhard          #+#    #+#             */
-/*   Updated: 2023/02/20 02:20:11 by ilinhard         ###   ########.fr       */
+/*   Updated: 2023/02/20 04:11:11 by ilinhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ typedef struct s_game
 	int			color_c;
 	int			player_x;
 	int			player_y;
+	int			init;
 	char		**map;
 	t_text_list	*head;
 

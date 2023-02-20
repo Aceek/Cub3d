@@ -6,7 +6,7 @@
 /*   By: ilinhard <ilinhard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 23:16:50 by ilinhard          #+#    #+#             */
-/*   Updated: 2023/02/20 01:48:31 by ilinhard         ###   ########.fr       */
+/*   Updated: 2023/02/20 04:11:56 by ilinhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void	ft_init_struct(t_game *game)
 	game->north = NULL;
 	game->south = NULL;
 	game->west = NULL;
+	game->init = 0;
 	game->color_c = 0;
 	game->color_f = 0;
 	game->player_x = 0;
@@ -39,6 +40,7 @@ int	main(int ac, char **av)
 	map = ft_init_parsing(av[1], game);
 	if (!map)
 		return (ft_free_data_game(game), 1);
+	game->init = 1;
 	game->map = map;
 	image.game = game;
 	init_mlx(&image, game);

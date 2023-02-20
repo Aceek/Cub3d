@@ -6,7 +6,7 @@
 /*   By: ilinhard <ilinhard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 00:43:35 by ilinhard          #+#    #+#             */
-/*   Updated: 2023/02/20 03:03:55 by ilinhard         ###   ########.fr       */
+/*   Updated: 2023/02/20 04:16:11 by ilinhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,10 @@ char	*ft_cpy(char *str)
 
 void	ft_free_data_game(t_game *game)
 {
+	t_text_list	*tmp;
+	t_text_list	*next;
+
+	tmp = game->head;
 	if (game && game->north)
 		free(game->north);
 	if (game && game->east)
@@ -85,6 +89,17 @@ void	ft_free_data_game(t_game *game)
 		free(game->west);
 	if (game && game->south)
 		free(game->south);
-	if (game)
+	if (game->init)
+	{
 		free(game);
+		return ;
+	}
+	while (tmp)
+	{
+		next = tmp->next;
+		free(tmp->path);
+		free(tmp);
+		tmp = next;
+	}
+	free(game);
 }
