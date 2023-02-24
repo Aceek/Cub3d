@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilinhard <ilinhard@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pbeheyt <pbeheyt@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 11:47:15 by pbeheyt           #+#    #+#             */
-/*   Updated: 2023/02/20 02:40:31 by ilinhard         ###   ########.fr       */
+/*   Updated: 2023/02/24 23:36:20 by pbeheyt          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,10 +56,10 @@ void	init_image(t_image *image, t_game *game)
 	t_text_list	*tmp;
 
 	ft_memset(image, 0, sizeof(t_image));
+	image->game = game;
 	image->mlx = mlx_init();
 	if (!image->mlx)
 		exit_clean(image);
-	image->game = game;
 	image->size.height = SCRHGHT;
 	image->size.width = SCRWDTH;
 	image->head = game->head;
