@@ -6,7 +6,7 @@
 /*   By: ilinhard <ilinhard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 11:47:15 by pbeheyt           #+#    #+#             */
-/*   Updated: 2023/02/25 04:02:03 by ilinhard         ###   ########.fr       */
+/*   Updated: 2023/02/25 04:41:17 by ilinhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ char	*error_message(int error)
 	tab[ERR_ARGS_NB] = "Error\nInvalid number of arguments\n";
 	tab[ERR_MLX] = "Error\nMlx failed to init or create content\n";
 	tab[ERR_FILE_PATH] = "Error\nInvalid texture path name\n";
-	tab[ERR_FILE_COLOR] = "Error\nInvalid color format\n";
+	tab[ERR_FILE_COLOR]
+		= "Error\nInvalid color format:'F/C' [0-255],[0-255],[0-255]\n";
 	tab[ERR_FILE_EMPTY] = "Error\nFile is empty\n";
 	tab[ERR_FILE_SPACE] = "Error\nUnexpected space in file\n";
 	tab[ERR_FILE_TXT_NAME] = "Error\nInvalid texture file name\n";
