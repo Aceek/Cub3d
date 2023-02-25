@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   display_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilinhard <ilinhard@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pbeheyt <pbeheyt@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 02:32:33 by ilinhard          #+#    #+#             */
-/*   Updated: 2023/02/20 02:20:00 by ilinhard         ###   ########.fr       */
+/*   Updated: 2023/02/25 00:22:26 by pbeheyt          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,9 +82,11 @@ t_texture	*ft_init_display(t_image *image)
 	size_line = 0;
 	global_img = malloc(sizeof(t_texture));
 	if (!global_img)
-		return (exit_clean(image), NULL);
+		return (error_handler(image, ERR_MALLOC), NULL);
 	global_img->content = mlx_new_image(image->mlx, image->size.width,
 			image->size.height);
+	if (!global_img->content)
+		return (error_handler(image, ERR_MLX), NULL);
 	global_img->buff = (int *)mlx_get_data_addr(global_img->content,
 			&bpp, &size_line, &endian);
 	return (global_img);

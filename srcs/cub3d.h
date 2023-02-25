@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilinhard <ilinhard@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pbeheyt <pbeheyt@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 23:17:42 by ilinhard          #+#    #+#             */
-/*   Updated: 2023/02/25 01:19:45 by ilinhard         ###   ########.fr       */
+/*   Updated: 2023/02/25 01:26:48 by pbeheyt          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,14 @@
 # define TIMER 5
 # define SCRHGHT 720
 # define SCRWDTH 1480
+
+enum e_error
+{
+	ERR_MALLOC,
+	ERR_NB_ARGS,
+	ERR_MLX,
+	ERR_PATH,
+};
 
 typedef struct s_size
 {
@@ -100,6 +108,7 @@ typedef struct s_image
 	t_pos		delta_dist;
 	t_posi		step;
 	t_posi		mouse;
+	int			error;
 	int			key;
 	int			draw_start;
 	int			line_height;
@@ -150,6 +159,7 @@ int			release(int keycode, t_image *image);
 void		mouse_motion(t_image *image);
 
 /*image/clear*/
+int			error_handler(t_image *image, int error);
 void		free_txt(t_image *image, t_texture *txt);
 int			exit_clean(t_image *image);
 
@@ -169,6 +179,7 @@ void		draw_map(t_image *image, t_posi len, t_posi pos, t_posi draw);
 void		*ft_memset(void *s, int c, size_t n);
 char		*ft_itoa(long long nbr);
 char		*ft_strjoin2(const char *s1, char *s2);
+void		ft_putstr_fd(char *s, int fd);
 int			ft_strlen(char *str);
 void		ft_free_tab(char **tab);
 

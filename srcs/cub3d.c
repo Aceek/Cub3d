@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilinhard <ilinhard@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pbeheyt <pbeheyt@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 23:16:50 by ilinhard          #+#    #+#             */
-/*   Updated: 2023/02/20 04:11:56 by ilinhard         ###   ########.fr       */
+/*   Updated: 2023/02/25 00:50:44 by pbeheyt          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,11 @@ int	main(int ac, char **av)
 	t_image	image;
 	char	**map;
 
-	if (ac < 2 || !av || !av[1])
-		return (write(1, "Error nb args\n", 14), 1);
+	if (ac != 2 || !av || !av[1])
+		return (error_handler(NULL, ERR_NB_ARGS));
 	game = malloc(sizeof(t_game));
 	if (!game)
-		return (0);
+		return (error_handler(NULL, ERR_MALLOC));
 	ft_init_struct(game);
 	map = ft_init_parsing(av[1], game);
 	if (!map)
