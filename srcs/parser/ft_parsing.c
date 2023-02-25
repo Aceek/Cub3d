@@ -6,7 +6,7 @@
 /*   By: ilinhard <ilinhard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 00:33:26 by ilinhard          #+#    #+#             */
-/*   Updated: 2023/02/25 02:52:46 by ilinhard         ###   ########.fr       */
+/*   Updated: 2023/02/25 03:55:47 by ilinhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ char	*ft_init_map(int file_fd)
 	str_map = NULL;
 	buff = malloc(sizeof(char) * (BUFFER_SIZE + 1));
 	if (!buff)
-		return (write(1, "Error init map\n", 15), NULL);
+		return (error_handler(NULL, ERR_MALLOC), NULL);
 	read_len = 1;
 	while (read_len)
 	{
@@ -66,15 +66,9 @@ int	ft_check_texture(char **map_file, t_game *game)
 	game->head = NULL;
 	i = 0;
 	if (!map_file)
-	{
-		write(1, "Error\nno map file\n", 18);
-		return (1);
-	}
+		return (error_handler(NULL, ERR_FILE_EMPTY));
 	if (ft_check_space_in_tab(map_file))
-	{
-		write(1, "Errors\nSpace in config file\n", 28);
-		return (1);
-	}
+		return (error_handler(NULL, ERR_FILE_SPACE));
 	if (ft_search_tab(map_file, "NO", &i, 1) >= 0)
 		game->north = ft_cpy(map_file[i]);
 	if (ft_search_tab(map_file, "SO", &i, 1) >= 0)
@@ -84,7 +78,7 @@ int	ft_check_texture(char **map_file, t_game *game)
 	if (ft_search_tab(map_file, "EA", &i, 1) >= 0)
 		game->east = ft_cpy(map_file[i]);
 	if (ft_check_text_name(game))
-		return (write(1, "Errors texture path\n", 20), 1);
+		return (error_handler(NULL, ERR_FILE_PATH));
 	ft_list_add_back(&game->head, ft_strdup(game->north), 0, game);
 	ft_animation(map_file, game);
 	return (0);
@@ -104,7 +98,7 @@ int	ft_check_color(char **map_file, t_game *game)
 	if (ft_search_tab(map_file, "C", &i, 1) >= 0)
 		game->color_c = ft_make_color(map_file[i]);
 	if (game->color_c < 0 || game->color_f < 0)
-		return (write(2, "Errors color format\n", 20), 1);
+		return (error_handler(NULL, ERR_FILE_COLOR));
 	return (0);
 }
 
@@ -118,10 +112,10 @@ char	**ft_init_parsing(char *file, t_game *game)
 	len = ft_strlen(file);
 	if (len < 4 || file[len - 1] != 'b' || file[len - 2] != 'u'
 		|| file[len - 3] != 'c' || file[len - 4] != '.')
-		return (write(1, "Error name file\n", 16), NULL);
+		return (error_handler(NULL, ERR_FILE_NAME), NULL);
 	file_fd = open(file, O_RDONLY);
 	if (file_fd < 0)
-		return (write(1, "Error can't open file\n", 22), NULL);
+		return (error_handler(NULL, ERR_FILE_OPEN), NULL);
 	str_map = ft_init_map(file_fd);
 	map_file = ft_split(str_map, '\n');
 	free(str_map);

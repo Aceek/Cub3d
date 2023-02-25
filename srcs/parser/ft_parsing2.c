@@ -6,7 +6,7 @@
 /*   By: ilinhard <ilinhard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 00:37:38 by ilinhard          #+#    #+#             */
-/*   Updated: 2023/02/25 00:26:10 by ilinhard         ###   ########.fr       */
+/*   Updated: 2023/02/25 03:34:59 by ilinhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,18 +88,18 @@ char	**ft_create_map(char **map, t_game *game)
 	while (++i >= 0 && map[i])
 	{
 		if (ft_check_carac(map[i], &count, game))
-			return (write(1, "Errors map:caract\n", 18), ft_free_tab(map), NULL);
+			return (error_handler(NULL, ERR_MAP_CARAC), NULL);
 		if (count && !game->player_y)
 			game->player_y = i - start_map;
 	}
 	if (count != 1)
 		return (ft_free_tab(map),
-			write(1, "Errors map format / caract\n", 27), NULL);
+			error_handler(NULL, ERR_MAP_FORMAT), NULL);
 	map = ft_final_map(map, start_map, (i - start_map));
 	count = 0;
 	map[game->player_y][game->player_x] = '0';
 	ft_verify_map_exit(map, game->player_y, game->player_x, &count);
 	if (count)
-		return (ft_free_tab(map), write(1, "Errors map have exit\n", 21), NULL);
+		return (ft_free_tab(map), error_handler(NULL, ERR_MAP_EXIT), NULL);
 	return (map);
 }

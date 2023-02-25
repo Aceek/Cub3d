@@ -3,27 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pbeheyt <pbeheyt@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ilinhard <ilinhard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 23:16:50 by ilinhard          #+#    #+#             */
-/*   Updated: 2023/02/25 00:50:44 by pbeheyt          ###   ########.fr       */
+/*   Updated: 2023/02/25 04:00:10 by ilinhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-void	ft_init_struct(t_game *game)
-{
-	game->east = NULL;
-	game->north = NULL;
-	game->south = NULL;
-	game->west = NULL;
-	game->init = 0;
-	game->color_c = 0;
-	game->color_f = 0;
-	game->player_x = 0;
-	game->player_y = 0;
-}
 
 int	main(int ac, char **av)
 {
@@ -32,11 +19,11 @@ int	main(int ac, char **av)
 	char	**map;
 
 	if (ac != 2 || !av || !av[1])
-		return (error_handler(NULL, ERR_NB_ARGS));
+		return (error_handler(NULL, ERR_ARGS_NB));
 	game = malloc(sizeof(t_game));
 	if (!game)
 		return (error_handler(NULL, ERR_MALLOC));
-	ft_init_struct(game);
+	ft_memset(game, 0, sizeof(t_game));
 	map = ft_init_parsing(av[1], game);
 	if (!map)
 		return (ft_free_data_game(game), 1);

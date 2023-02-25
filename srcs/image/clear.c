@@ -3,28 +3,40 @@
 /*                                                        :::      ::::::::   */
 /*   clear.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pbeheyt <pbeheyt@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ilinhard <ilinhard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 11:47:15 by pbeheyt           #+#    #+#             */
-/*   Updated: 2023/02/25 01:04:11 by pbeheyt          ###   ########.fr       */
+/*   Updated: 2023/02/25 04:02:03 by ilinhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
+char	*error_message(int error)
+{
+	char	*tab[14];
+
+	tab[ERR_MALLOC] = "Error\nMemory alloction\n";
+	tab[ERR_ARGS_NB] = "Error\nInvalid number of arguments\n";
+	tab[ERR_MLX] = "Error\nMlx failed to init or create content\n";
+	tab[ERR_FILE_PATH] = "Error\nInvalid texture path name\n";
+	tab[ERR_FILE_COLOR] = "Error\nInvalid color format\n";
+	tab[ERR_FILE_EMPTY] = "Error\nFile is empty\n";
+	tab[ERR_FILE_SPACE] = "Error\nUnexpected space in file\n";
+	tab[ERR_FILE_TXT_NAME] = "Error\nInvalid texture file name\n";
+	tab[ERR_FILE_NAME] = "Error\nInvald file name\n";
+	tab[ERR_FILE_FORMAT] = "Error\nInvald file format\n";
+	tab[ERR_FILE_OPEN] = "Error\nCan't open file\n";
+	tab[ERR_MAP_CARAC] = "Error\nInvalid character on map\n";
+	tab[ERR_MAP_FORMAT] = "Error\nInvalid map format\n";
+	tab[ERR_MAP_EXIT] = "Error\nMap have exit\n";
+	return (tab[error]);
+}
+
 int	error_handler(t_image *image, int error)
 {
-	if (error)
-	{
-		if (error == ERR_MALLOC)
-			ft_putstr_fd("Error\nMemory alloction error\n", 2);
-		else if (error == ERR_NB_ARGS)
-			ft_putstr_fd("Error\nInvalid number of arguments\n", 2);
-		else if (error == ERR_MLX)
-			ft_putstr_fd("Error\nMlx failed to init or create content\n", 2);
-		else if (error == ERR_PATH)
-			ft_putstr_fd("Error\nInvalid texture path name\n", 2);
-	}
+	if (error >= 0)
+		ft_putstr_fd(error_message(error), 2);
 	if (image)
 	{
 		image->error = error;
