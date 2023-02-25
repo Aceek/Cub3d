@@ -6,7 +6,7 @@
 /*   By: ilinhard <ilinhard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 05:55:57 by ilinhard          #+#    #+#             */
-/*   Updated: 2023/02/25 03:04:10 by ilinhard         ###   ########.fr       */
+/*   Updated: 2023/02/25 05:17:44 by ilinhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ int	ft_atoi(char *str, int *pos, int first)
 
 	nbr = 0;
 	len = 0;
+	while (first && str[*pos] == ' ')
+		*pos += 1;
 	if (first && (str[*pos] == 'F' || str[*pos] == 'C'))
 		*pos += 1;
 	while (first && str[*pos] == ' ')
