@@ -6,7 +6,7 @@
 /*   By: ilinhard <ilinhard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 00:33:26 by ilinhard          #+#    #+#             */
-/*   Updated: 2023/02/25 01:20:24 by ilinhard         ###   ########.fr       */
+/*   Updated: 2023/02/25 02:52:46 by ilinhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,10 @@ int	ft_check_texture(char **map_file, t_game *game)
 	game->head = NULL;
 	i = 0;
 	if (!map_file)
+	{
+		write(1, "Error\nno map file\n", 18);
 		return (1);
+	}
 	if (ft_check_space_in_tab(map_file))
 	{
 		write(1, "Errors\nSpace in config file\n", 28);

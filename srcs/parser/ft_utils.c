@@ -6,7 +6,7 @@
 /*   By: ilinhard <ilinhard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 00:43:35 by ilinhard          #+#    #+#             */
-/*   Updated: 2023/02/25 01:19:34 by ilinhard         ###   ########.fr       */
+/*   Updated: 2023/02/25 02:55:06 by ilinhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ int	ft_check_size_map(char **map_file, t_game *game)
 	ft_search_tab(map_file, "1", &max, 0);
 	if ((max - 5 - size_list) != 0)
 	{
-		printf("Error\nconfig file too mush line\n");
+		printf("Error\nconfig file format line\n"); // no
 		return (1);
 	}
 	return (0);
