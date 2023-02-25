@@ -3,14 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   libft.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilinhard <ilinhard@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pbeheyt <pbeheyt@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 03:14:58 by ilinhard          #+#    #+#             */
-/*   Updated: 2023/02/20 02:15:54 by ilinhard         ###   ########.fr       */
+/*   Updated: 2023/02/25 00:07:00 by pbeheyt          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
+
+void	ft_putstr_fd(char *s, int fd)
+{
+	int	i;
+
+	if (fd < 0 || !s)
+		return ;
+	i = -1;
+	while (s[++i])
+		write(fd, &s[i], 1);
+}
 
 char	*ft_strdup(const char *s)
 {

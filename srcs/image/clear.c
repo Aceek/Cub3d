@@ -3,14 +3,35 @@
 /*                                                        :::      ::::::::   */
 /*   clear.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilinhard <ilinhard@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pbeheyt <pbeheyt@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 11:47:15 by pbeheyt           #+#    #+#             */
-/*   Updated: 2023/02/20 03:19:52 by ilinhard         ###   ########.fr       */
+/*   Updated: 2023/02/25 00:58:14 by pbeheyt          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
+
+int	error_handler(t_image *image, int error)
+{
+	if (error)
+	{
+		if (error == ERR_MALLOC)
+			ft_putstr_fd("Error\nMemory alloction error\n", 2);
+		else if (error == ERR_NB_ARGS)
+			ft_putstr_fd("Error\nInvalid number of arguments\n", 2);
+		else if (error == ERR_MLX)
+			ft_putstr_fd("Error\nMlx failed to init or create content\n", 2);
+		else if (error == ERR_PATH)
+			ft_putstr_fd("Error\nInvalid texture path name\n", 2);
+	}
+	if (image)
+	{
+		image->error = error;
+		exit_clean(image);
+	}
+	return (error);
+}
 
 void	free_txt(t_image *image, t_texture *txt)
 {
@@ -56,5 +77,5 @@ int	exit_clean(t_image *image)
 	}
 	ft_free_tab(image->game->map);
 	ft_free_data_game(image->game);
-	exit(1);
+	exit(image->error);
 }

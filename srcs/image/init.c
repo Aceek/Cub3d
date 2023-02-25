@@ -6,7 +6,7 @@
 /*   By: pbeheyt <pbeheyt@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 11:47:15 by pbeheyt           #+#    #+#             */
-/*   Updated: 2023/02/24 23:36:20 by pbeheyt          ###   ########.fr       */
+/*   Updated: 2023/02/25 01:01:23 by pbeheyt          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,20 +22,18 @@ t_texture	*file_to_image(t_image *image, char *path)
 	bpp = 32;
 	endian = 1;
 	size_line = 0;
+	path = 0;
 	if (!path)
-		return (exit_clean(image), NULL);
+		return (error_handler(image, ERR_PATH), NULL);
 	txt = malloc(sizeof(t_texture));
 	if (!txt)
-		return (exit_clean(image), NULL);
+		return (error_handler(image, ERR_MALLOC), NULL);
 	ft_memset(txt, 0, sizeof(t_texture));
 	txt->path = path;
 	txt->content = mlx_xpm_file_to_image(image->mlx, txt->path,
 			&txt->size.width, &txt->size.height);
 	if (!txt->content)
-	{
-		write(2, "Errors loading texture\n", 23);
-		return (free(txt), exit_clean(image), NULL);
-	}
+		return (free(txt), error_handler(image, ERR_MLX), NULL);
 	txt->buff = \
 		(int *)mlx_get_data_addr(txt->content, &bpp, &size_line, &endian);
 	return (txt);
@@ -59,7 +57,7 @@ void	init_image(t_image *image, t_game *game)
 	image->game = game;
 	image->mlx = mlx_init();
 	if (!image->mlx)
-		exit_clean(image);
+		error_handler(image, ERR_MLX);
 	image->size.height = SCRHGHT;
 	image->size.width = SCRWDTH;
 	image->head = game->head;
