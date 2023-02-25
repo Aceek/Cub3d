@@ -6,7 +6,7 @@
 /*   By: ilinhard <ilinhard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 00:33:26 by ilinhard          #+#    #+#             */
-/*   Updated: 2023/02/20 03:05:47 by ilinhard         ###   ########.fr       */
+/*   Updated: 2023/02/25 01:20:24 by ilinhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,19 +67,21 @@ int	ft_check_texture(char **map_file, t_game *game)
 	i = 0;
 	if (!map_file)
 		return (1);
-	if (ft_search_tab(map_file, "NO", &i) >= 0)
-		game->north = ft_cpy(map_file[i]);
-	if (ft_search_tab(map_file, "SO", &i) >= 0)
-		game->south = ft_cpy(map_file[i]);
-	if (ft_search_tab(map_file, "WE", &i) >= 0)
-		game->west = ft_cpy(map_file[i]);
-	if (ft_search_tab(map_file, "EA", &i) >= 0)
-		game->east = ft_cpy(map_file[i]);
-	if (ft_check_text_name(game))
+	if (ft_check_space_in_tab(map_file))
 	{
-		write(1, "Errors texture path\n", 20);
+		write(1, "Errors\nSpace in config file\n", 28);
 		return (1);
 	}
+	if (ft_search_tab(map_file, "NO", &i, 1) >= 0)
+		game->north = ft_cpy(map_file[i]);
+	if (ft_search_tab(map_file, "SO", &i, 1) >= 0)
+		game->south = ft_cpy(map_file[i]);
+	if (ft_search_tab(map_file, "WE", &i, 1) >= 0)
+		game->west = ft_cpy(map_file[i]);
+	if (ft_search_tab(map_file, "EA", &i, 1) >= 0)
+		game->east = ft_cpy(map_file[i]);
+	if (ft_check_text_name(game))
+		return (write(1, "Errors texture path\n", 20), 1);
 	ft_list_add_back(&game->head, ft_strdup(game->north), 0, game);
 	ft_animation(map_file, game);
 	return (0);
@@ -92,9 +94,11 @@ int	ft_check_color(char **map_file, t_game *game)
 	i = 0;
 	if (!map_file)
 		return (1);
-	if (ft_search_tab(map_file, "F", &i) >= 0)
+	game->color_c = -1;
+	game->color_f = -1;
+	if (ft_search_tab(map_file, "F", &i, 1) >= 0)
 		game->color_f = ft_make_color(map_file[i]);
-	if (ft_search_tab(map_file, "C", &i) >= 0)
+	if (ft_search_tab(map_file, "C", &i, 1) >= 0)
 		game->color_c = ft_make_color(map_file[i]);
 	if (game->color_c < 0 || game->color_f < 0)
 		return (write(2, "Errors color format\n", 20), 1);
@@ -121,6 +125,8 @@ char	**ft_init_parsing(char *file, t_game *game)
 	if (ft_check_texture(map_file, game))
 		return (ft_free_tab(map_file), NULL);
 	if (ft_check_color(map_file, game))
+		return (ft_free_tab(map_file), NULL);
+	if (ft_check_size_map(map_file, game))
 		return (ft_free_tab(map_file), NULL);
 	map_file = ft_create_map(map_file, game);
 	return (map_file);

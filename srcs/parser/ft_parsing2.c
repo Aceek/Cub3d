@@ -6,7 +6,7 @@
 /*   By: ilinhard <ilinhard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 00:37:38 by ilinhard          #+#    #+#             */
-/*   Updated: 2023/02/19 00:05:48 by ilinhard         ###   ########.fr       */
+/*   Updated: 2023/02/25 00:26:10 by ilinhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ char	**ft_create_map(char **map, t_game *game)
 
 	i = 0;
 	count = 0;
-	ft_search_tab(map, "1", &i);
+	ft_search_tab(map, "1", &i, 0);
 	start_map = i - 1;
 	while (++i >= 0 && map[i])
 	{

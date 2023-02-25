@@ -6,7 +6,7 @@
 /*   By: ilinhard <ilinhard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 00:29:24 by ilinhard          #+#    #+#             */
-/*   Updated: 2023/02/20 03:21:16 by ilinhard         ###   ########.fr       */
+/*   Updated: 2023/02/25 00:47:42 by ilinhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ int	ft_animation(char **map_file, t_game *game)
 	pos = 0;
 	tmp2 = ft_itoa(i);
 	tmp = ft_strjoin2("NO", tmp2);
-	while (ft_search_tab(map_file, tmp, &pos) >= 0)
+	while (ft_search_tab(map_file, tmp, &pos, 1) >= 0)
 	{
 		game->animation = 1;
 		path = ft_cpy(map_file[pos]);

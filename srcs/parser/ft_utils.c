@@ -6,47 +6,24 @@
 /*   By: ilinhard <ilinhard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 00:43:35 by ilinhard          #+#    #+#             */
-/*   Updated: 2023/02/20 04:16:11 by ilinhard         ###   ########.fr       */
+/*   Updated: 2023/02/25 01:19:34 by ilinhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-int	ft_strlen(char *str)
-{
-	int	i;
-
-	i = 0;
-	while (str && str[i])
-		i++;
-	return (i);
-}
-
-int	ft_search_tab(char **tab, char *to_find, int *pos)
+int	ft_search_tab(char **tab, char *to_find, int *pos, int mod)
 {
 	int	i;
 
 	i = 0;
 	while (tab[i])
 	{
-		if (ft_find(tab[i], to_find))
+		if (ft_find(tab[i], to_find, mod))
 			return (*pos = i, i);
 		i++;
 	}
 	return (*pos = -1, -1);
-}
-
-void	ft_free_tab(char **tab)
-{
-	int	i;
-
-	i = -1;
-	while (tab && tab[++i])
-	{
-		if (tab[i])
-			free(tab[i]);
-	}
-	free(tab);
 }
 
 char	*ft_cpy(char *str)
@@ -102,4 +79,45 @@ void	ft_free_data_game(t_game *game)
 		tmp = next;
 	}
 	free(game);
+}
+
+int	ft_check_size_map(char **map_file, t_game *game)
+{
+	int				size_list;
+	int				max;
+	t_text_list		*tmp;
+
+	size_list = 0;
+	max = 0;
+	tmp = game->head;
+	while (tmp)
+	{
+		size_list++;
+		tmp = tmp->next;
+	}
+	ft_search_tab(map_file, "1", &max, 0);
+	if ((max - 5 - size_list) != 0)
+	{
+		printf("Error\nconfig file too mush line\n");
+		return (1);
+	}
+	return (0);
+}
+
+int	ft_check_space_in_tab(char **map)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (map[i])
+	{
+		j = 0;
+		while (map[i][j] == ' ')
+			j++;
+		if (map[i][j] == '\0')
+			return (1);
+		i++;
+	}
+	return (0);
 }

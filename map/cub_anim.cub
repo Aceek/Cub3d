@@ -6,7 +6,6 @@ EA ./txt/metal.xpm
 SO ./txt/scary_wall.xpm
 WE ./txt/rock.xpm
 
-
 F 0,0,0
 C 255,255,255
 

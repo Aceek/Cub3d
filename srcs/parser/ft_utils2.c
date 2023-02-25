@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_utils2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pbeheyt <pbeheyt@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ilinhard <ilinhard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 05:55:57 by ilinhard          #+#    #+#             */
-/*   Updated: 2023/01/25 00:33:41 by pbeheyt          ###   ########.fr       */
+/*   Updated: 2023/02/25 00:58:59 by ilinhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,22 +23,30 @@ int	ft_make_color(char *str)
 	red = -1;
 	blue = -1;
 	green = -1;
-	red = ft_atoi(str, &i);
-	green = ft_atoi(str, &i);
-	blue = ft_atoi(str, &i);
+	red = ft_atoi(str, &i, 1);
+	green = ft_atoi(str, &i, 0);
+	blue = ft_atoi(str, &i, 0);
+	while (str[i] && str[i] == ' ')
+		i++;
+	if (str[i] != '\0')
+		return (-1);
 	if (green < 0 || red < 0 || blue < 0)
 		return (-1);
 	return (ft_encode_rgb(red, green, blue));
 }
 
-int	ft_atoi(char *str, int *pos)
+int	ft_atoi(char *str, int *pos, int first)
 {
 	int	nbr;
 	int	len;
 
 	nbr = 0;
 	len = 0;
-	while (str && str[*pos] && !(str[*pos] >= '0' && str[*pos] <= '9'))
+	if (first && (str[*pos] == 'F' || str[*pos] == 'C'))
+		*pos += 1;
+	while (first && str[*pos] == ' ')
+		*pos += 1;
+	if (!first && str[*pos] == ',')
 		*pos += 1;
 	while (str && (str[*pos] >= '0' && str[*pos] <= '9'))
 	{
@@ -46,7 +54,7 @@ int	ft_atoi(char *str, int *pos)
 		*pos += 1;
 		len++;
 	}
-	if (!len || len >= 4)
+	if (!len || len >= 4 || nbr > 255)
 		return (-1);
 	return (nbr);
 }
@@ -83,7 +91,7 @@ char	*ft_strjoin(char *s1, char *s2)
 	return (new);
 }
 
-int	ft_find(char *str, char *to_find)
+int	ft_find(char *str, char *to_find, int mod)
 {
 	int	i;
 	int	j;
@@ -96,7 +104,9 @@ int	ft_find(char *str, char *to_find)
 	j = 0;
 	while (str[i + j] && to_find[j] && str[i + j] == to_find[j])
 			j++;
-	if (j == len)
+	if (!mod && j == len)
+		return (1);
+	else if (mod && j == len && str[i + j] == ' ')
 		return (1);
 	return (0);
 }

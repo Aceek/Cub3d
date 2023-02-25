@@ -6,7 +6,7 @@
 /*   By: ilinhard <ilinhard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 23:17:42 by ilinhard          #+#    #+#             */
-/*   Updated: 2023/02/20 04:11:11 by ilinhard         ###   ########.fr       */
+/*   Updated: 2023/02/25 01:19:45 by ilinhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,23 +166,24 @@ void		print_mini_map(t_image *image);
 void		draw_map(t_image *image, t_posi len, t_posi pos, t_posi draw);
 
 /*libft*/
-char		**ft_split(char const *s, char c);
 void		*ft_memset(void *s, int c, size_t n);
 char		*ft_itoa(long long nbr);
 char		*ft_strjoin2(const char *s1, char *s2);
-
-/*parsing*/
-char		**ft_init_parsing(char *file, t_game *game);
 int			ft_strlen(char *str);
 void		ft_free_tab(char **tab);
-int			ft_search_tab(char **tab, char *to_find, int *pos);
+
+/*parsing*/
+int			ft_check_space_in_tab(char **map);
+int			ft_check_size_map(char **map_file, t_game *game);
+char		**ft_init_parsing(char *file, t_game *game);
+int			ft_search_tab(char **tab, char *to_find, int *pos, int mod);
 char		*ft_cpy(char *str);
 void		ft_free_data_game(t_game *game);
 int			ft_make_color(char *str);
-int			ft_atoi(char *str, int *pos);
+int			ft_atoi(char *str, int *pos, int first);
 int			ft_encode_rgb(int red, int green, int blue);
 char		*ft_strjoin(char *s1, char *s2);
-int			ft_find(char *str, char *to_find);
+int			ft_find(char *str, char *to_find, int mod);
 char		**ft_create_map(char **map, t_game *game);
 char		*ft_strdup(const char *s);
 int			ft_animation(char **map_file, t_game *game);

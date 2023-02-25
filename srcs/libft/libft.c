@@ -6,7 +6,7 @@
 /*   By: ilinhard <ilinhard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 03:14:58 by ilinhard          #+#    #+#             */
-/*   Updated: 2023/02/20 02:15:54 by ilinhard         ###   ########.fr       */
+/*   Updated: 2023/02/25 01:18:25 by ilinhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,4 +80,27 @@ char	*ft_itoa(long long nbr)
 	if (sign)
 		str[0] = '-';
 	return (str);
+}
+
+int	ft_strlen(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str && str[i])
+		i++;
+	return (i);
+}
+
+void	ft_free_tab(char **tab)
+{
+	int	i;
+
+	i = -1;
+	while (tab && tab[++i])
+	{
+		if (tab[i])
+			free(tab[i]);
+	}
+	free(tab);
 }
