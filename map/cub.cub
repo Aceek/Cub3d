@@ -1,7 +1,6 @@
 NO ./txt/fire.xpm
 EA ./txt/metal.xpm
 SO ./txt/scary_wall.xpm
-
 WE ./txt/rock.xpm
 F 255,23,255   
 C 0,5,20

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pbeheyt <pbeheyt@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ilinhard <ilinhard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 23:17:42 by ilinhard          #+#    #+#             */
-/*   Updated: 2023/02/25 01:26:48 by pbeheyt          ###   ########.fr       */
+/*   Updated: 2023/02/25 01:30:20 by ilinhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -182,6 +182,7 @@ char		*ft_strjoin2(const char *s1, char *s2);
 void		ft_putstr_fd(char *s, int fd);
 int			ft_strlen(char *str);
 void		ft_free_tab(char **tab);
+char		**ft_split(char const *s, char c);
 
 /*parsing*/
 int			ft_check_space_in_tab(char **map);

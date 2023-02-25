@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pbeheyt <pbeheyt@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ilinhard <ilinhard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 11:47:15 by pbeheyt           #+#    #+#             */
-/*   Updated: 2023/02/25 01:01:23 by pbeheyt          ###   ########.fr       */
+/*   Updated: 2023/02/25 01:31:38 by ilinhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ t_texture	*file_to_image(t_image *image, char *path)
 	bpp = 32;
 	endian = 1;
 	size_line = 0;
-	path = 0;
 	if (!path)
 		return (error_handler(image, ERR_PATH), NULL);
 	txt = malloc(sizeof(t_texture));
