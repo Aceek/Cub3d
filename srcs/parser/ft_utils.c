@@ -6,7 +6,7 @@
 /*   By: ilinhard <ilinhard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 00:43:35 by ilinhard          #+#    #+#             */
-/*   Updated: 2023/02/28 04:15:21 by ilinhard         ###   ########.fr       */
+/*   Updated: 2023/02/28 04:25:07 by ilinhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ int	ft_check_size_map(char **map_file, t_game *game)
 {
 	int				size_list;
 	int				max;
+	int				max2;
 	t_text_list		*tmp;
 
 	size_list = 0;
@@ -41,6 +42,9 @@ int	ft_check_size_map(char **map_file, t_game *game)
 		tmp = tmp->next;
 	}
 	ft_search_tab(map_file, "1", &max, 0);
+	ft_search_tab(map_file, "0", &max2, 0);
+	if (max2 > 0 && max2 < max)
+		max = max2;
 	if ((max - 5 - size_list) != 0)
 		return (error_handler(NULL, ERR_FILE_FORMAT));
 	return (0);
