@@ -6,7 +6,7 @@
 /*   By: ilinhard <ilinhard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 00:33:26 by ilinhard          #+#    #+#             */
-/*   Updated: 2023/02/25 03:55:47 by ilinhard         ###   ########.fr       */
+/*   Updated: 2023/02/28 04:15:12 by ilinhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,6 +117,8 @@ char	**ft_init_parsing(char *file, t_game *game)
 	if (file_fd < 0)
 		return (error_handler(NULL, ERR_FILE_OPEN), NULL);
 	str_map = ft_init_map(file_fd);
+	if (ft_check_map_separation(str_map))
+		return (free(str_map), NULL);
 	map_file = ft_split(str_map, '\n');
 	free(str_map);
 	if (ft_check_texture(map_file, game))

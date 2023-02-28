@@ -1,7 +1,7 @@
-NO ./tex/weird.xpm
-SO ./tex/weird.xpm
-WE ./tex/weird.xpm
-EA ./tex/weird.xpm
+NO ./txt/weird.xpm
+SO ./txt/weird.xpm
+WE ./txt/weird.xpm
+EA ./txt/weird.xpm
 
 F 100,200,150
 C 150,200,100

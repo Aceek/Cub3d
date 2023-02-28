@@ -6,7 +6,7 @@
 /*   By: ilinhard <ilinhard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 11:47:15 by pbeheyt           #+#    #+#             */
-/*   Updated: 2023/02/25 04:41:17 by ilinhard         ###   ########.fr       */
+/*   Updated: 2023/02/28 04:03:49 by ilinhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 char	*error_message(int error)
 {
-	char	*tab[14];
+	char	*tab[16];
 
 	tab[ERR_MALLOC] = "Error\nMemory alloction\n";
 	tab[ERR_ARGS_NB] = "Error\nInvalid number of arguments\n";
@@ -31,6 +31,8 @@ char	*error_message(int error)
 	tab[ERR_MAP_CARAC] = "Error\nInvalid character on map\n";
 	tab[ERR_MAP_FORMAT] = "Error\nInvalid map format\n";
 	tab[ERR_MAP_EXIT] = "Error\nMap have exit\n";
+	tab[ERR_MAP_NEWLINE] = "Error\nMap can't be separate by empty newline\n";
+	tab[ERR_MAP_START] = "Error\nCan't find map start\n";
 	return (tab[error]);
 }
 

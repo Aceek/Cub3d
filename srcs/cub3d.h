@@ -6,7 +6,7 @@
 /*   By: ilinhard <ilinhard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 23:17:42 by ilinhard          #+#    #+#             */
-/*   Updated: 2023/02/25 03:57:10 by ilinhard         ###   ########.fr       */
+/*   Updated: 2023/02/28 04:13:50 by ilinhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,8 @@ enum e_error
 	ERR_MAP_FORMAT,
 	ERR_MAP_EXIT,
 	ERR_MAP_EMPTY,
+	ERR_MAP_NEWLINE,
+	ERR_MAP_START,
 };
 
 typedef struct s_size
@@ -194,14 +196,17 @@ void		ft_putstr_fd(char *s, int fd);
 int			ft_strlen(char *str);
 void		ft_free_tab(char **tab);
 char		**ft_split(char const *s, char c);
+char		*ft_cpy(char *str);
+void		ft_free_data_game(t_game *game);
 
 /*parsing*/
+int			ft_check_map_start(char *str_map);
+int			ft_check_map_separation(char *str_map);
 int			ft_check_space_in_tab(char **map);
 int			ft_check_size_map(char **map_file, t_game *game);
 char		**ft_init_parsing(char *file, t_game *game);
 int			ft_search_tab(char **tab, char *to_find, int *pos, int mod);
 char		*ft_cpy(char *str);
-void		ft_free_data_game(t_game *game);
 int			ft_make_color(char *str);
 int			ft_atoi(char *str, int *pos, int first);
 int			ft_encode_rgb(int red, int green, int blue);

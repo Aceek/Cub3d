@@ -6,7 +6,7 @@
 /*   By: ilinhard <ilinhard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 00:43:35 by ilinhard          #+#    #+#             */
-/*   Updated: 2023/02/25 03:36:07 by ilinhard         ###   ########.fr       */
+/*   Updated: 2023/02/28 04:15:21 by ilinhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,61 +24,6 @@ int	ft_search_tab(char **tab, char *to_find, int *pos, int mod)
 		i++;
 	}
 	return (*pos = -1, -1);
-}
-
-char	*ft_cpy(char *str)
-{
-	int		i;
-	int		j;
-	int		len;
-	char	*new;
-
-	i = 0;
-	while (str[i] && str[i] != '.')
-		i++;
-	len = ft_strlen(str) - i;
-	if (!str[i] || str[i] != '.' || len <= 0)
-		return (NULL);
-	new = malloc(sizeof(char) * (len + 1));
-	if (!new)
-		return (NULL);
-	j = 0;
-	while (str[i + j])
-	{
-		new[j] = str[i + j];
-		j++;
-	}
-	new[j] = '\0';
-	return (new);
-}
-
-void	ft_free_data_game(t_game *game)
-{
-	t_text_list	*tmp;
-	t_text_list	*next;
-
-	tmp = game->head;
-	if (game && game->north)
-		free(game->north);
-	if (game && game->east)
-		free(game->east);
-	if (game && game->west)
-		free(game->west);
-	if (game && game->south)
-		free(game->south);
-	if (game->init)
-	{
-		free(game);
-		return ;
-	}
-	while (tmp)
-	{
-		next = tmp->next;
-		free(tmp->path);
-		free(tmp);
-		tmp = next;
-	}
-	free(game);
 }
 
 int	ft_check_size_map(char **map_file, t_game *game)
@@ -114,6 +59,44 @@ int	ft_check_space_in_tab(char **map)
 			j++;
 		if (map[i][j] == '\0')
 			return (1);
+		i++;
+	}
+	return (0);
+}
+
+int	ft_check_map_start(char *str_map)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (str_map[i])
+	{
+		if (str_map[i] == '\n')
+		{
+			j = 1;
+			while (str_map[i + j] && str_map[i + j] == ' ')
+				j++;
+			if (str_map[i + j] == '1' || str_map[i + j] == '0')
+				return (i + j);
+		}
+		i++;
+	}
+	return (0);
+}
+
+int	ft_check_map_separation(char *str_map)
+{
+	int	i;
+
+	i = ft_check_map_start(str_map);
+	if (!i)
+		return (error_handler(NULL, ERR_MAP_START), 1);
+	while (str_map[i])
+	{
+		if (str_map[i] == '\n' && str_map[i + 1] == '\n'
+			&& (str_map[i + 2] == '1' || str_map[i + 2] == '0'))
+			return (error_handler(NULL, ERR_MAP_NEWLINE), 1);
 		i++;
 	}
 	return (0);
