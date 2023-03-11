@@ -6,7 +6,7 @@
 /*   By: ilinhard <ilinhard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 05:55:57 by ilinhard          #+#    #+#             */
-/*   Updated: 2023/03/11 22:44:56 by ilinhard         ###   ########.fr       */
+/*   Updated: 2023/03/11 22:57:18 by ilinhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ int	ft_find(char *str, char *to_find, int mod)
 			j++;
 	if (!mod && j == len)
 		return (1);
-	else if (mod && j == len && str[i + j] == ' ')
+	else if (mod && j == len && (str[i + j] == ' ' || str[i + j] == '\t'))
 		return (1);
 	return (0);
 }
