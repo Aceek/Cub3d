@@ -6,7 +6,7 @@
 /*   By: ilinhard <ilinhard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 23:17:42 by ilinhard          #+#    #+#             */
-/*   Updated: 2023/02/28 04:13:50 by ilinhard         ###   ########.fr       */
+/*   Updated: 2023/03/11 23:07:09 by ilinhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,14 +45,12 @@ enum e_error
 	ERR_FILE_COLOR,
 	ERR_FILE_EMPTY,
 	ERR_FILE_SPACE,
-	ERR_FILE_TXT_NAME,
 	ERR_FILE_NAME,
 	ERR_FILE_FORMAT,
 	ERR_FILE_OPEN,
 	ERR_MAP_CARAC,
 	ERR_MAP_FORMAT,
 	ERR_MAP_EXIT,
-	ERR_MAP_EMPTY,
 	ERR_MAP_NEWLINE,
 	ERR_MAP_START,
 };

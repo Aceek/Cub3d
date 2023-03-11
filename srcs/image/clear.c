@@ -6,7 +6,7 @@
 /*   By: ilinhard <ilinhard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 11:47:15 by pbeheyt           #+#    #+#             */
-/*   Updated: 2023/03/11 21:51:52 by ilinhard         ###   ########.fr       */
+/*   Updated: 2023/03/11 23:07:03 by ilinhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 char	*error_message(int error)
 {
-	char	*tab[16];
+	char	*tab[15];
 
 	tab[ERR_MALLOC] = "Error\nMemory alloction\n";
 	tab[ERR_ARGS_NB] = "Error\nInvalid number of arguments\n";
@@ -24,7 +24,6 @@ char	*error_message(int error)
 		= "Error\nInvalid color format:'F/C' [0-255],[0-255],[0-255]\n";
 	tab[ERR_FILE_EMPTY] = "Error\nFile is empty\n";
 	tab[ERR_FILE_SPACE] = "Error\nUnexpected space in file\n";
-	tab[ERR_FILE_TXT_NAME] = "Error\nInvalid texture file name\n";
 	tab[ERR_FILE_NAME] = "Error\nInvald file name\n";
 	tab[ERR_FILE_FORMAT] = "Error\nInvald file format\n";
 	tab[ERR_FILE_OPEN] = "Error\nCan't open file\n";
