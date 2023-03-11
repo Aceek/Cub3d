@@ -6,7 +6,7 @@
 /*   By: ilinhard <ilinhard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 00:37:38 by ilinhard          #+#    #+#             */
-/*   Updated: 2023/02/28 04:14:50 by ilinhard         ###   ########.fr       */
+/*   Updated: 2023/03/11 22:34:56 by ilinhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	ft_check_carac(char *str, int *count, t_game *game)
 	int	i;
 
 	i = 0;
-	while (str[i] && (str[i] == ' ' || str[i] == '\t'))
+	while (str[i] && str[i] == ' ')
 		i++;
 	while (str[i])
 	{
@@ -85,16 +85,16 @@ char	**ft_create_map(char **map, t_game *game)
 	count = 0;
 	ft_search_tab(map, "1", &i, 0);
 	start_map = i - 1;
-	while (++i >= 0 && map[i])
+	while (i >= 0 && map[i])
 	{
 		if (ft_check_carac(map[i], &count, game))
 			return (ft_free_tab(map), error_handler(NULL, ERR_MAP_CARAC), NULL);
 		if (count && !game->player_y)
 			game->player_y = i - start_map;
+		i++;
 	}
 	if (count != 1)
-		return (ft_free_tab(map),
-			error_handler(NULL, ERR_MAP_FORMAT), NULL);
+		return (ft_free_tab(map), error_handler(NULL, ERR_MAP_FORMAT), NULL);
 	map = ft_final_map(map, start_map, (i - start_map));
 	count = 0;
 	map[game->player_y][game->player_x] = '0';

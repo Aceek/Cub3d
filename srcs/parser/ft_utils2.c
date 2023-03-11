@@ -6,7 +6,7 @@
 /*   By: ilinhard <ilinhard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 05:55:57 by ilinhard          #+#    #+#             */
-/*   Updated: 2023/02/25 05:17:44 by ilinhard         ###   ########.fr       */
+/*   Updated: 2023/03/11 22:37:50 by ilinhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	ft_make_color(char *str)
 	red = ft_atoi(str, &i, 1);
 	green = ft_atoi(str, &i, 0);
 	blue = ft_atoi(str, &i, 0);
-	while (str[i] && str[i] == ' ')
+	while (str[i] && (str[i] == ' ' || str[i] == '\t'))
 		i++;
 	if (str[i] != '\0')
 		return (-1);
@@ -101,7 +101,7 @@ int	ft_find(char *str, char *to_find, int mod)
 
 	i = 0;
 	len = ft_strlen(to_find);
-	while (str && str[i] == ' ')
+	while (str && (str[i] == ' ' || str[i] == '\t'))
 		i++;
 	j = 0;
 	while (str[i + j] && to_find[j] && str[i + j] == to_find[j])
