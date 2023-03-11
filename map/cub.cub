@@ -1,7 +1,17 @@
-			NO 				./txt/fire.xpm
-EA		 ./txt/metal.xpm
-			SO  	 			  ./txt/scary_wall.xpm
-		WE                  	    		   			./txt/rock.xpm
-		F  255,23,255   
-C         0,5,20
+NO ./txt/fire.xpm
+EA ./txt/metal.xpm
+SO ./txt/scary_wall.xpm
+WE ./txt/rock.xpm
 
+F 0,0,0
+C 255,255,255
+
+111111111
+100000001
+100000001
+100000001
+1000N0001
+100000001
+100000001
+100000001
+111111111

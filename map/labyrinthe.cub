@@ -1,7 +1,7 @@
-NO ./tex/rock.xpm
-SO ./tex/rock.xpm
-WE ./tex/rock.xpm
-EA ./tex/rock.xpm
+NO ./txt/rock.xpm
+SO ./txt/rock.xpm
+WE ./txt/rock.xpm
+EA ./txt/rock.xpm
 
 F 10,20,30
 C 150,200,250

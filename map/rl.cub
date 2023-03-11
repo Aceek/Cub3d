@@ -1,7 +1,7 @@
-NO ./tex/plank.xpm
-SO ./tex/plank.xpm
-WE ./tex/plank.xpm
-EA ./tex/plank.xpm
+NO ./txt/plank.xpm
+SO ./txt/plank.xpm
+WE ./txt/plank.xpm
+EA ./txt/plank.xpm
 
 F 30,20,10
 C 200,225,250
