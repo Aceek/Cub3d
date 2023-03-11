@@ -6,7 +6,7 @@
 /*   By: ilinhard <ilinhard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 05:55:57 by ilinhard          #+#    #+#             */
-/*   Updated: 2023/03/11 22:37:50 by ilinhard         ###   ########.fr       */
+/*   Updated: 2023/03/11 22:44:56 by ilinhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	ft_make_color(char *str)
 	red = ft_atoi(str, &i, 1);
 	green = ft_atoi(str, &i, 0);
 	blue = ft_atoi(str, &i, 0);
-	while (str[i] && (str[i] == ' ' || str[i] == '\t'))
+	while (str[i] && str[i] == ' ')
 		i++;
 	if (str[i] != '\0')
 		return (-1);
@@ -42,11 +42,11 @@ int	ft_atoi(char *str, int *pos, int first)
 
 	nbr = 0;
 	len = 0;
-	while (first && str[*pos] == ' ')
+	while (first && (str[*pos] == ' ' || str[*pos] == '\t'))
 		*pos += 1;
 	if (first && (str[*pos] == 'F' || str[*pos] == 'C'))
 		*pos += 1;
-	while (first && str[*pos] == ' ')
+	while (first && (str[*pos] == ' ' || str[*pos] == '\t'))
 		*pos += 1;
 	if (!first && str[*pos] == ',')
 		*pos += 1;
