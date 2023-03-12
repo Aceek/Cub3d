@@ -6,7 +6,7 @@
 /*   By: ilinhard <ilinhard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 00:37:38 by ilinhard          #+#    #+#             */
-/*   Updated: 2023/03/12 02:46:39 by ilinhard         ###   ########.fr       */
+/*   Updated: 2023/03/12 03:11:20 by ilinhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,13 +38,13 @@ int	ft_check_carac(char *str, int *count, t_game *game)
 
 char	**ft_final_map(char **map, int start_map, int len)
 {
-	char    **final_map;
-	int        i;
+	char	**final_map;
+	int		i;
 
 	i = 0;
 	final_map = NULL;
-	if (len  < 3)
-		return (ft_free_tab(map),error_handler(NULL, ERR_MAP_FORMAT), NULL);
+	if (len < 3)
+		return (ft_free_tab(map), error_handler(NULL, ERR_MAP_FORMAT), NULL);
 	final_map = malloc(sizeof(char *) * (len + 1));
 	if (!final_map)
 		return (ft_free_tab(map), NULL);
@@ -75,12 +75,28 @@ void	ft_verify_map_exit(char **map, int i, int j, int *exit)
 	ft_verify_map_exit(map, i, j + 1, exit);
 }
 
-char    **ft_create_map(char **map, t_game *game)
+char	**ft_verify_map_error(char **map, t_game *game, int i, int start_map)
 {
-	int    i;
-	int    start_map;
-	int    count;
-	int		first;
+	int	exit;
+
+	exit = 0;
+	map = ft_final_map(map, start_map, (i - start_map));
+	if (!map)
+		return (NULL);
+	exit = 0;
+	map[game->player_y][game->player_x] = '0';
+	ft_verify_map_exit(map, game->player_y, game->player_x, &exit);
+	if (exit)
+		return (ft_free_tab(map), error_handler(NULL, ERR_MAP_EXIT), NULL);
+	return (map);
+}
+
+char	**ft_create_map(char **map, t_game *game)
+{
+	int	i;
+	int	start_map;
+	int	count;
+	int	first;
 
 	first = 0;
 	i = 0;
@@ -101,13 +117,5 @@ char    **ft_create_map(char **map, t_game *game)
 	if (count != 1)
 		return (ft_free_tab(map),
 			error_handler(NULL, ERR_MAP_FORMAT), NULL);
-	map = ft_final_map(map, start_map, (i - start_map));
-	if (!map)
-		return (NULL);
-	count = 0;
-	map[game->player_y][game->player_x] = '0';
-	ft_verify_map_exit(map, game->player_y, game->player_x, &count);
-	if (count)
-		return (ft_free_tab(map), error_handler(NULL, ERR_MAP_EXIT), NULL);
-	return (map);
+	return (map = ft_verify_map_error(map, game, i, start_map), map);
 }
