@@ -6,7 +6,7 @@
 /*   By: ilinhard <ilinhard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 00:37:38 by ilinhard          #+#    #+#             */
-/*   Updated: 2023/03/12 01:11:38 by ilinhard         ###   ########.fr       */
+/*   Updated: 2023/03/12 01:27:31 by ilinhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ char    **ft_final_map(char **map, int start_map, int len)
 
     i = 0;
     final_map = NULL;
-    if (len < 3)
+    if (len - 1 < 3)
         return (ft_free_tab(map), NULL);
     final_map = malloc(sizeof(char *) * (len + 1));
     if (!final_map)
@@ -114,7 +114,10 @@ char    **ft_create_map(char **map, t_game *game)
         return (ft_free_tab(map),
             error_handler(NULL, ERR_MAP_FORMAT), NULL);
     map = ft_final_map(map, start_map, (i - start_map));
+	if (!map)
+		return (NULL);
     count = 0;
+	game->player_y -= 1;
     map[game->player_y][game->player_x] = '0';
     ft_verify_map_exit(map, game->player_y, game->player_x, &count);
     if (count)
