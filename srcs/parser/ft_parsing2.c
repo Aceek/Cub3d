@@ -6,7 +6,7 @@
 /*   By: ilinhard <ilinhard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 00:37:38 by ilinhard          #+#    #+#             */
-/*   Updated: 2023/03/12 01:30:21 by ilinhard         ###   ########.fr       */
+/*   Updated: 2023/03/12 01:33:53 by ilinhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ char    **ft_final_map(char **map, int start_map, int len)
     i = 0;
     final_map = NULL;
     if (len - 1 < 3)
-        return (ft_free_tab(map), NULL);
+        return (ft_free_tab(map),error_handler(NULL, ERR_MAP_FORMAT), NULL);
     final_map = malloc(sizeof(char *) * (len + 1));
     if (!final_map)
         return (ft_free_tab(map), NULL);
