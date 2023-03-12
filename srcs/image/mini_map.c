@@ -74,7 +74,7 @@ void	draw_map(t_image *image, t_posi len, t_posi pos, t_posi draw)
 		{
 			if (pos.y >= 0)
 				len.x = ft_strlen(image->game->map[pos.y]);
-			if (pos.x < len.x && pos.x >= 0 && pos.y > 0 && pos.y < len.y
+			if (pos.x < len.x && pos.x >= 0 && pos.y >= 0 && pos.y < len.y
 				&& image->game->map[pos.y][pos.x] == '1')
 				print_tile(draw.x * TILE, draw.y * TILE, image, BLACK);
 			draw.x++;
